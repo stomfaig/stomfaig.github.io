@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Holomorphic and Functional Calculi | asd</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Holomorphic and Functional Calculi" />
+<meta name="author" content="Gergo Stomfai" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="In this series, I intend to summarize how different functional calculi are consructed, and aim to provide some motivations why they are useful. In this first article, I am mainly concerned with developing the theory of the holomorphic and continuous functional calculi." />
+<meta property="og:description" content="In this series, I intend to summarize how different functional calculi are consructed, and aim to provide some motivations why they are useful. In this first article, I am mainly concerned with developing the theory of the holomorphic and continuous functional calculi." />
+<link rel="canonical" href="http://localhost:4000/projects/oa-calc/2024/06/23/on-calc-1.html" />
+<meta property="og:url" content="http://localhost:4000/projects/oa-calc/2024/06/23/on-calc-1.html" />
+<meta property="og:site_name" content="asd" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-06-23T00:00:00+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Holomorphic and Functional Calculi" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Gergo Stomfai"},"dateModified":"2024-06-23T00:00:00+01:00","datePublished":"2024-06-23T00:00:00+01:00","description":"In this series, I intend to summarize how different functional calculi are consructed, and aim to provide some motivations why they are useful. In this first article, I am mainly concerned with developing the theory of the holomorphic and continuous functional calculi.","headline":"Holomorphic and Functional Calculi","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/projects/oa-calc/2024/06/23/on-calc-1.html"},"url":"http://localhost:4000/projects/oa-calc/2024/06/23/on-calc-1.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="asd" />
+</head>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script
+  type="text/javascript"
+  charset="utf-8"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+>
+</script>
+<script
+  type="text/javascript"
+  charset="utf-8"
+  src="https://vincenttam.github.io/javascripts/MathJaxLocal.js"
+>
+</script>
+
+
+  <body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">asd</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">1. Holomorphic and Functional Calculi</h1>
+    <p class="post-meta"><time class="dt-published" datetime="2024-06-23T00:00:00+01:00" itemprop="datePublished">
+        Jun 23, 2024
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>In this series, I intend to summarize how different functional calculi are consructed, and aim to provide some motivations why they are useful. In this first article, I am mainly concerned with developing the theory of the holomorphic and continuous functional calculi.</p>
+
+<p><em>Disclaimer: My notes heavily influenced by ‘An introduction to the theory of C*-algebras’ by G. J. Murphy, and many proofs and developments are the exact ones in the book. These documents are intended to help for those reading the book, by providing more detail in some cases, or by organizing the material in a different way.</em></p>
+
+<p><em>This article is not complete yet</em></p>
+
+<hr />
+
+<p>Let $\Omega$ be a compact Hausdorff topological space, and consider the Banach algebra $C(\Omega)$ with involution given by complex conjugation. This space is a C* algebra. There are many prototypical properties of this space, that are really useful and intuitive, when one works with elements of this algebra. Let us take a look at few of these.</p>
+
+<p>Given $f \in C(\Omega)$, we say that $f$ is positive, if $f(\omega) \in \mathbb{R}$ and $f(\omega) \geq 0 \forall \omega \in \Omega$. Denote by $C(\Omega)^+$  the set of positive function. This class of functions is really well behaved.</p>
+
+<ol>
+  <li>Consider $f \in C(\Omega)$ such that $f(\omega) \in \mathbb{R} \ \forall \omega \in \Omega$. These are the self adjoint elements of $C(\Omega)$ Then, one can set $f^+ = f \vee 0$ and $f^- = (-f) \vee 0$, to obtain $f^-, f^+ \in C^+(\Omega)$ so that $f= f^+ + f^-$. Given an arbitrary $f \in C(\Omega)$, we can decompose $f$ into real and imaginary parts, upon considering $\frac{1}{2}(f^* + f)$ and $\frac{1}{2i} ( f^* - f)$. Both of these are self-adjoint, and thus real valued.<br />
+From see that any property that can be proven for arbitrary positive functions, and is preserved under vectorspace operations is true for the whole C*-algebra $C(\Omega)$. (Note that $C(\Omega)$ is a C* algebra is crucial here: we made use of the involution operation, to deconstruct $f$ into self-adjoint parts.)</li>
+  <li>Many convenient tools are available when working over the functions $C(\Omega)^+$. We can take square roots, for example. It is highly non-trivial at this stage how to do this over a Banach or C*-algebra.</li>
+  <li>positivity criteria</li>
+  <li>Consider $f \in C(\Omega)$, and suppose that the support $\text{supp}(f)$ is a proper closed subset of $\Omega$. Then, by Urysohn’s lemma, there is $0 \neq g \in C(\Omega)$ so that $fg = 0$.</li>
+</ol>
+
+<p>When working in Banach algebras, it is often convenient, to</p>
+
+<h2 id="holomorphic-functional-calculus">Holomorphic functional calculus.</h2>
+<p>Let $A$ be a Banach algebra, and let $a \in A$. Further, let $f: \mathbb{C} \to \mathbb{C}$ be a holomorphic function.</p>
+
+<h2 id="gelfand-representations">Gelfand representations.</h2>
+
+<p>In this section we continually assume that $A$ is abelian.</p>
+
+<p><strong>Definition</strong>. A <em>character</em> on a Banach algebra $A$ is a homomorphism $\tau: A \to \mathbb{C}$. We denote by $\Omega(A)$ the set of all characters on $A$.</p>
+
+<p>Characters can be thought of as a generaliazation of the spectrum of an element:</p>
+
+<p><strong>Theorem 1.</strong> Let $A$ be an abelian Banach algebra. If $A$ is unital, $\sigma(a) = \{ \tau(a): \tau \in \Omega(A) \}$, while if $A$ non-unital, then $\sigma(a) = {0 } \cup {\tau(a): \tau \in \Omega(A) }$ $\forall a \in A$.</p>
+
+<p><strong>Proof</strong>.</p>
+
+<p>We define the <em>Gelfand representation</em> $\widehat{a}$ of an element $a \in A$ as follows:<br />
+\(\widehat{a} : \Omega(A) \to \mathbb{C} \quad \widehat{a}(\tau) = \tau(a)\)</p>
+
+<p>Notice that the function $\widehat{a}$ is continuous of compact support. Indeed, if $\tau_n \to \tau$, then $\tau_n(a) \to \tau(a)$, since $\Omega(A)$ has the weak-* topology, and therefore $\widehat{a}(\tau_n) \to \widehat{a}(\tau)$. Further, given $\epsilon &gt; 0$ and consider the set $\{ \widehat{a}(\tau) &gt; \epsilon : \tau \in \Omega(A) \}$</p>
+
+<p>Now we are ready for the definitive result of Gelfand representations.</p>
+
+<p><strong>Theorem</strong>. The map $\widehat{\cdot}: A \to C_0(A)$ is a norm-decreasing homomorphism, with $\| \widehat{a}\|_\infty = r(a)$.</p>
+
+<p>In the case when $A$ is a C*-algebra, we can say even more. Indeed, suppose that $\phi$ is *-homomorphism. Then, using the C* identity $\| a \|^2 = \| a^* a \|$ in $\mathbb{C}$,<br />
+\(\| \phi(a)\|^2=\|\phi(a)^* \phi(a) \| = \| \phi(a^* a ) \| = r(a^*a)\)<br />
+Since $a^* a$ is self-adjoint, we have that $ r(a^*a) =a^* a $, and therefore $\| \phi(a) \|_\infty = \| a \| $. One can easily prove that the Gelfand representation is itself a *-homomorphism, and therefore an isometry. Note further, that $\widehat{\cdot} : A \to C_0(\Omega(A))$ is an isomorphism, since the image $\widehat{A}$ is dense in $C_0(\Omega(A))$ by the Stone-Weierstrass theorem. Combining all these results, we obtain the following</p>
+
+<p><strong>Theorem 2.</strong> Let $A$ be an abelian C*-algebra. Then, the Gelfand representation $\widehat{\cdot} : A \to C_0(\Omega)$ is an isometric *-isomorphism.</p>
+
+<h2 id="the-functional-calculus">The functional calculus.</h2>
+
+<p>We use the results from the previous section, to prove the following theorem.</p>
+
+<p><strong>Theorem</strong>. Let $a$ be a normal element of a unital C*-algebra $A$, and suppose that $z$ is the inclusion map $z: \sigma(a) \to \mathbb{C}$. Then, there is a unique unital *-homomorphism $\varphi: C_0(\sigma(a)) \to A$ such that $\varphi(z) = a$. In fact $\varphi$ is isometric.</p>
+
+<p>All the previous results are only true in abelian Banach algebras and C*-algebras. Given a normal element $a \in A$, the C*-algebra $B=C^*(a)$ generated by $\mathbf1$ and $a$ is unital and abelian, which puts us in a good position to apply Theorem 2. We still have some work to do however.</p>
+
+<p><strong>Lemma.</strong> If $A$ is a unital Banach algebra generated by $\mathbf1$ and some $a \in A$. Then, $\widehat{a}:\Omega(A) \to \sigma(a)$ is a homeomorphism.</p>
+
+<p><strong>Proof.</strong> First of all, observe that $\widehat{\cdot}$ is a bijection: if two characters $\tau, \mu \in \Omega(A)$ agree on $a$, then $\tau = \mu$, since $a$ generates $A$. Further, $\widehat{a}$ is clearly surjective by Theorem 1. Since $\widehat{a}$ is a bijection between locally compact Hausdorff spaces, it is a homeomorphism.</p>
+
+<p><strong>Corollary.</strong> isomorphism when C*</p>
+
+<p><strong>Lemma.</strong> If $A$ is a unital C*-algebra, and $B$ is a C*-subalgebra of $A$ containing the unit of $A$, then<br />
+\(\sigma_B(b) = \sigma_A(b) \quad \forall b \in B\)</p>
+
+<p><strong>Proof.</strong></p>
+
+<p>Now, consider the Gelfand representation $\psi: B \to C(\Omega(B))$, which is a *-isomorphism. Given $\widehat{a} : \Omega(B) \to \sigma(a)$, which is an isomorphism, so $\widehat{a}^t:C(\sigma(a)) \to C(\Omega(B))$ given by<br />
+\(\widehat{a}^t: C(\sigma(a)) \to C(\Omega(B)), \quad f \mapsto f \circ \theta\)<br />
+is another isomorphism. Therefore $\varphi: C(\sigma(a)) \to A$ given by $\varphi = \psi^{-1} \circ \widehat{a}^t$ is exactly the map we  are looking for.</p>
+
+<h2 id="applications">Applications</h2>
+
+
+  </div>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script
+  type="text/javascript"
+  charset="utf-8"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+>
+</script>
+<script
+  type="text/javascript"
+  charset="utf-8"
+  src="https://vincenttam.github.io/javascripts/MathJaxLocal.js"
+>
+</script>
+
+
+  <a class="u-url" href="/projects/oa-calc/2024/06/23/on-calc-1.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="http://localhost:4000/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+        <ul class="contact-list">
+          <li class="p-name">Gergo Stomfai</li>
+          <li><a class="u-email" href="mailto:stomfaig@gmail.com">stomfaig@gmail.com</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p>-
+</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

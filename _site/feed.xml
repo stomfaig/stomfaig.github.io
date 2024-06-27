@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-06-27T15:53:19+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">asd</title><subtitle>-
+</subtitle><author><name>Gergo Stomfai</name><email>stomfaig@gmail.com</email></author><entry><title type="html">A brief summary of Compact and finite rank operators</title><link href="http://localhost:4000/misc/2024/06/26/low-rank-operators.html" rel="alternate" type="text/html" title="A brief summary of Compact and finite rank operators" /><published>2024-06-26T00:00:00+01:00</published><updated>2024-06-26T00:00:00+01:00</updated><id>http://localhost:4000/misc/2024/06/26/low-rank-operators</id><content type="html" xml:base="http://localhost:4000/misc/2024/06/26/low-rank-operators.html"><![CDATA[<p><em>Disclaimer: My notes heavily influenced by ‘An introduction to the theory of C*-algebras’ by G. J. Murphy, and many proofs and developments are the exact ones in the book. These documents are intended to help for those reading the book, by providing more detail in some cases, or by organizing the material in a different way.</em></p>
+
+<p><em>This article is not complete yet</em></p>
+
+<hr />
+
+<p>Given a Hilbert space $H$, let $F(H)$ denote the finite-rank operators on $H$, and $K(H)$ the subspace of compact operators. We have the following.</p>
+
+<p><strong>Theorem.</strong> $F(H)$ is dense in $K(H)$.</p>
+
+<p><strong>Proof.</strong> Clearly $F(H)$ and $K(H)$ are both self-adjoint, hence given $a \in K(H)$ the unique self-adjoint elements $c, b$ such that $a = b + ic$ are also in $K(H)$. Thus, it is sufficient to prove the statement for self-adjoint elements of $K(H)$.<br />
+Given $u \in K(H)$ self-adjoint, $u$ is diagonalisable and its eigenvalues tend to 0. From this, one can construct diagonal approximations to $u$ of finite rank that tend to $u$ in norm.</p>
+
+<p>We start by introducing the following very convenient notation. Let $H$ be a Hilbert space, and let $x, y \in H$. Then, define $x \otimes y$ as follows:</p>
+
+<center> $$ (x \otimes y)(z) = \langle z, y \rangle x $$ </center>
+
+<p><strong>Theorem.</strong> If $H$ is a Hilbert space, then $F(H)$ is linearly spanned by the rank-one projections.</p>
+
+<p><strong>Proof.</strong> Since $F(H)$ self-adjoint, it is sufficient to prove the statement for $u \in F(H)$ self-adjoint. Further, by polar decomposition $|u| \in F(H)$, so without loss of generality the positive and negative parts of $u$ are in $F(H)$. Hence, we may assume that $u \geq 0$.<br />
+Note that $u(H)$ is a finite dimensional subspace of $H$, thus a Hilbert space itself, with orthonormal basis $e_1, \ldots, e_n$, say. Consider the projection $p = \sum_{j=1}^{n} e_j \otimes e_j$ of $H$ onto $u(H)$. Then, $u = pu$, and therefore $u^{1/2} = (pu)^{1/2}$. Both sides are self-adjoint, so</p>
+<center> $$ u = (u^{1/2})^2 = (u^{1/2})^* u^{1/2} = $$  there is a mistake here I think</center>
+<p>Once the above line if figured out, the proof should go fine…</p>
+
+<p><strong>Theorem.</strong> If $I$ is a non-zero ideal in $B(H)$, then $I$ contains $F(H)$.</p>
+
+<p><strong>Proof.</strong> Let $I$ be a non-zero operator in $I$. Then $u(x) \neq 0$ for some $x \in I$. Consider a rank-one projection $p = y \otimes y$ for some $y \in H$ of unit length. We can find $v \in B(H)$ such that $vu(x) = y$. Then,</p>
+<center> $$ vu \big( x \otimes x\big) (vu)^* = y \otimes y $$ </center>
+<p>Therefore all rank-one projections are in $I$, as $u \in I$. Now apply the previous theorem.</p>
+
+<p><strong>Remark.</strong> In the above proof, it might seem a bit goofy to construct $y \otimes y$ from $x \otimes x$, and a lot of other things. To me it helps to understand and memorise this proof by thinking about the fact, that the <em>only</em> thing available to us to construct $y \otimes y$ is the fact that $u(x) \neq 0$, and that in the construction of $y \otimes y$, $u$ must appear somewhere.</p>
+
+<p><strong>Definition.</strong> invariance and irreducibility</p>
+
+<p><strong>Theorem.</strong> Let $A$ be a C*-algebra acting irreducibly on a Hilbert space $H$, and having non-zero intersection with $K(H)$. Then, $K(H) \subset A$.</p>
+
+<p><strong>Proof.</strong></p>]]></content><author><name>Gergo Stomfai</name><email>stomfaig@gmail.com</email></author><category term="misc" /><summary type="html"><![CDATA[Disclaimer: My notes heavily influenced by ‘An introduction to the theory of C*-algebras’ by G. J. Murphy, and many proofs and developments are the exact ones in the book. These documents are intended to help for those reading the book, by providing more detail in some cases, or by organizing the material in a different way.]]></summary></entry><entry><title type="html">Toeplitz operators</title><link href="http://localhost:4000/misc/2024/06/25/Toeplitz-operators-copy.html" rel="alternate" type="text/html" title="Toeplitz operators" /><published>2024-06-25T00:00:00+01:00</published><updated>2024-06-25T00:00:00+01:00</updated><id>http://localhost:4000/misc/2024/06/25/Toeplitz-operators%20copy</id><content type="html" xml:base="http://localhost:4000/misc/2024/06/25/Toeplitz-operators-copy.html"><![CDATA[<p><em>Disclaimer: My notes heavily influenced by ‘An introduction to the theory of C*-algebras’ by G. J. Murphy, and many proofs and developments are the exact ones in the book. These documents are intended to help for those reading the book, by providing more detail in some cases, or by organizing the material in a different way.</em></p>
+
+<p><em>This article is not complete yet</em></p>
+
+<hr />
+
+<p>Consider the circle group $\mathbb{T}$ endowed with the arc length measure. Define for each $n \in \mathbb{Z}$ the function $\varepsilon_n: \mathbb{T} \to \mathbb{T}$ given by $\lambda \to \lambda^n$. We denote by $\Gamma$ the closed linear span of the $\varepsilon_n$.</p>
+
+<p><strong>Theorem 1.</strong> $\Gamma$ is norm dense *-subalgebra of $C(\mathbb{T})$.</p>
+
+<p><strong>Proof.</strong>  \(\tag*{\(\blacksquare\)}\)</p>
+
+<p>Since $C(\mathbb{T})$ is dense in $L^p(\mathbb{T})$ for every $p$, we have the following.</p>
+
+<p><strong>Corollary.</strong> $\Gamma$ is norm dense in the spaces $L^p(\mathbb{T})$.</p>
+
+<p>In $L^2(\mathbb{T})$, $\int \varepsilon_n(\lambda) \overline{\varepsilon_m(\lambda)} d \lambda = \int_{0}^{2\pi} e^{i n \theta } e^{im \theta} d \theta = C \cdot \delta_{n,m}$ for some constant, hence $\{ \varepsilon_n \}_{n \in \mathbb{Z}}$ is an orthonormal basis for the Hilbert space $H^2(\mathbb{T})$. Given $f \in L^1(\mathbb{T})$, we define the Fourier transform $\widehat{f}$ of $f$ as</p>
+<center> $$\widehat{f}(n) = \int f(\lambda) \overline{\varepsilon_n(\lambda)} d \lambda$$ </center>
+
+<p><strong>Definition.</strong> For $p \in [1, \infty]$, we define the <em>Hardy space</em></p>
+<center>$$H^p = \{f \in L^p(\mathbb{T}) : \widehat{f}(n) = 0, \ \forall n &lt; 0\}$$ </center>
+
+<p>Note that $\{ \varepsilon_n\}_{n \in \mathbb{N}}$ is an orthonormal basis for $H^p$.</p>
+
+<p>In what follows, we will mainly work in $L^2(\mathbb{T})$ and in $H^2$. We do this for the natural reason: these are Hilbert spaces under the inner-product $(f, g) = \int f \bar{g}$, and therefore the algebra of their operators is a C*-algebra.</p>
+
+<p><strong>Definition.</strong> Suppose that $\varphi \in L^\infty(\mathbb{T})$. Then, we define the multiplication operator $M_\varphi$ as follows:</p>
+<center> $$M_\varphi \in B(L^2(\mathbb{T})), \quad M_\varphi(f) = \varphi f$$ </center>
+
+<p>And note that the map $L^\infty(\mathbb{T}) \to B(L(\mathbb{T})), \varphi \mapsto M_\varphi$ is an isometric *-homomorphism.</p>
+
+<p>Consider the operator $u = M_{\varepsilon_1}$. This is the unilateral shift operator in $L^2(\mathbb{T})$ the basis $\{ \varepsilon_n \}_{n \in \mathbb{Z}}$, and the left-shift in $H^2$ with respect to the basis $\{ \varepsilon_n \}_{n \in \mathbb{N}}$.</p>
+
+<p><strong>Theorem 2.</strong> If $w \in B(L^2(\mathbb{T}))$, then $w$ commutes with $v$ <em>iff</em> $w = M_\varphi$ for some $\varphi \in L^\infty (\mathbb{T})$.</p>
+
+<p><strong>Remark.</strong> This result can be made much more familiar, upon putting it into the right perspective.</p>
+
+<p><strong>Proof.</strong> $(\implies)$ Consider $\psi \in \Gamma$. Then, $M_\psi$ is in the span of the operators $\{ v^n \}_{n \in N}$, as the map $\psi \mapsto M_\psi$ is a homomorphism, as noted before. Then, since $w$ commutes with $v$, it also commutes with all the $M_\psi$’s, for $\psi \in \Gamma$.<br />
+Since $\Gamma$ is norm-dense in $L^2(\mathbb{T})$, for any $\psi \in L^2(\mathbb{T})$, there is a sequence $\psi_n \in \Gamma$ so that $\psi_n \to \psi$ in $L^2$, and so $w(\psi_n) \to w(\psi)$ in $L^2$. Upon passing to a subsequence we may assume that $w(\psi_n) \to w(\psi)$ almost everywhere.<br />
+Define $\varphi = w(\varepsilon_0)$. Then, for each $n$, $\psi_n = \psi_n \varepsilon_0 = M_{\psi_n} \varepsilon_0$. Since $\psi_n \in \Gamma$, $\psi_n$ and $w$ commute $\forall n$, so</p>
+<center> $$ w(\psi_n) = w M_{\psi_n} (\varepsilon_0) = M_{\psi_n} w(\varepsilon_0) = \psi_n \varphi$$ </center>
+<p>Now, by considering the sets $E_n = \{ \lambda \in \mathbb{T} : |\varphi(\lambda)| &gt; | w| + 1/n \}$, it follows that $|\varphi(\lambda) | &lt; | w |$.<br />
+$(\impliedby)$ Suppose that $w = M_\varphi$ for some $\varphi \in L^\infty(\mathbb{T})$. Then,</p>
+<center> $$v M_\varphi (f) = v ( \varphi f) = \varphi v(f) = M_\varphi(vf) \tag*{\(\blacksquare\)}$$ </center>
+
+<p>If $E$ is Borel set of $\mathbb{T}$, then $M_{\chi_E}$ is a projection on $L^2(\mathbb{T})$, which is easily checked.</p>
+
+<p><strong>Definition.</strong> Let $E$ be as above. We call the range of $M_{\chi_E}$ is called a <em>Wiener subspace</em> of $L^2(\mathbb{T})$.</p>
+
+<p>Note that for any Wiener subspace $K$, we have that $v(K) =K$. This follows from the fact $v$ and $M_{\chi_E}$ commute as per Theorem 2.</p>
+
+<p><strong>Definition.</strong> Let $\varphi \in L^\infty(\mathbb{T})$ be unitary. Then $\varphi H^2$ is a closed subspace of $L^2(\mathbb{T})$, called a <em>Beurling space</em>.</p>
+
+<p><strong>Theorem 3.</strong> The invariant subspaces of $L^2(\mathbb{T})$ under $v$ are exactly the Wiener and Beurling spaces. If $K$ is an invariant subspace for $v$, further,</p>
+<ol>
+  <li>if $v(K) = K$, then $K$ is a Wiener subspace,</li>
+  <li>if $v(K) \neq K$, then $K$ is a Beurling subspace.</li>
+</ol>
+
+<p><strong>Proof.</strong> Suppose that $v(K) = K$, and let $p \in B(L^2(\mathbb{T}))$ be the projection operator onto the subspace $K$. Then, $pv$ and $vp$ clearly agree on $K$. Further, if $f \in K^\perp$, notice that $vp(f) = v(0) = 0$. Further, $v^*$ is the left-shift, which is the inverse of $v$, so $v^*(K) = K$ as well. From this,</p>
+<center> $$\langle v(f), g \rangle = \langle f, v^*(g) \rangle = 0 \quad \forall g \in K$$ </center>
+<p>Therefore $vp = pv$. By Theorem 2, there is $\varphi \in L^\infty(\mathbb{T})$ so that $p = M_\varphi$, and so $K = \text{im} \ M_\varphi$. Since $p$ is projection, and $\varphi \mapsto M_\varphi$ is a *-homomorphism, we $\varphi$ is also a projection, i.e. $\varphi = \chi_E$ for some measurable set $E$. From all this it follows that $K$ is a Wiener subspace.<br />
+Now suppose that $v(K) \neq K$. Then, there is a unit vector $\varphi \in K$ such that $\varphi \notin v(K)$. Now, clearly $v^n(\varphi) \subset v(K)$, therefore $\langle v^n(\varphi), \varphi \rangle = 0$. From this,</p>
+<center> $$0 = \int \varepsilon_n(\lambda) | \varphi(\lambda)|^2 d \lambda \quad \forall n \in \mathbb{Z}$$ </center>
+<p>And from this we have that $|\varphi(\lambda)|^2 = \alpha $ a.e. By the choice of $\varphi$, we have that $\| \varphi\|_2 = 1$, we must have $| \varphi(\lambda)|^2 = 1$. We conclude that $\varphi$ is unitary in $L^2(\mathbb{T})$.<br />
+Note that $\varphi H^2 \subset K$, since $H^2$ is the closure of $\Gamma^+$, i.e. for any $\psi \in H^2$, $M_\psi$ is in the span of $\{ v^i \}_{i\geq 1}$, and as $v(K) \subset K$, we have have that $\varphi H^2 \subset K$. $\{ \varepsilon_n \varphi \}_{n \in \mathbb{Z}}$ is an orthogonal system, which spans $L^2(\mathbb{T})$. Note also, that for $n &lt; 0$, $\varepsilon_n \varphi \in K^\perp$, since</p>
+<center> $$\langle \varepsilon_n \varphi, \psi \rangle = \langle \varphi, \varepsilon_{-n} \psi \rangle = 0$$</center>
+<p>which follows from the argument before. From these observations it follows that $\{ \varepsilon_n \varphi \}_{n \in \mathbb{N}}$ is an orthonormal basis. \(\tag*{\(\blacksquare\)}\)</p>
+
+<p>Now let’s look at two interesting applications of this theorem.</p>
+
+<p><strong>Theorem</strong>(F. and M. Riesz)<strong>.</strong> If $f$ is a function in $H^2$ that does not vanish a.e., then it it vanishes on a set of measure zero.</p>
+
+<p><strong>Proof.</strong> Let $E = f^{-1}(0)$. Then, consider the norm-closed subspace $K$ of $H^2$, for which $g \in K$ iff $\chi_E g = 0$ a.e. Then, $v(g) = \varepsilon_1 g \in H^2$, and $ \varepsilon_1 g \chi_E = 0$ a.e., so $v(K) \subset K$. Note also, that $\cap_n v^n(K) \subset \cap_n v^n(H^2) = 0$, thus either $v(K) = K = 0$, or $v(K) \neq K$. The former can be easily seen to be absurd. For the latter, by Theorem 3, there is $\varphi \in $ unitary such that $K = \varphi H^2$. Then, $\varphi \chi_E = 0$ a.e., from which $E$ must have measure zero.</p>
+
+<p><strong>Theorem.</strong> The only closed subspaces of $H^2$ reducing for the unilateral shift are the trivially invariant subspaces.</p>
+
+<p>In what follows, given an innerproduct space $H$, and a closed subsapce $A$, we denote by $H \ominus A$ the complementary subspace of $A$ in $H$.</p>
+
+<p><strong>Proof.</strong> Suppose that $K$ is a non-trivial subspace of $H^2$ reducing $u$. Then, by arguing as in the proof of the previous theorem, we see that $u(K) \neq K$, so $K$ is a Beurling subspace. Note that $H^2 \ominus K$ is also invariant, and arguing just as before it is also Beurling. Thus, there is $\varphi, \psi \in L^\infty(\mathbb{T})$ unitary, so that $K = \varphi H^2$ and $H^2 \ominus K = \psi H^2$.<br />
+Since $K$ is invariant under $u$, we have that</p>
+<center>  $$\langle u^n \varphi, \psi \rangle = \langle \varepsilon_n \varphi, \psi \rangle = 0 = \langle \varphi, \varepsilon_n \psi \rangle = \langle \varphi, u^n(\psi) \rangle $$ </center>
+<p>and therefore $\varphi \overline{\psi}$ has zero Fourier transform, and therefore $\varphi \overline{\psi} = 0$ a.e. Since both of these functions are unitary, this is absurd.</p>
+
+<h2 id="toeplitz-operators">Toeplitz operators</h2>
+
+<p><strong>Definition.</strong> Let $p$ be the projection of $L^2(\mathbb{T})$ onto $H^2$. If $\varphi \in L^\infty(\mathbb{T})$, we define the <em>Toeplitz operator</em> $T_\varphi$ with symbol $\varphi$:</p>
+<center> $$ T_\varphi: H^2 \to H^2, \quad f \mapsto p(\varphi f) $$ </center>
+<p>Clearly $\| T_\varphi \| \leq \| \varphi |||$. Further, if $\psi \in L^\infty(\mathbb{T})$,</p>
+<center>$$T_{\varphi + \psi}(f) = p \big( (\varphi + \psi) f \big) = p(\varphi f) + p( \psi f) = T_{\varphi}(f) + T_{\psi}(f)$$ </center>
+<p>hence $\varphi \mapsto T_\varphi$ is linear. Let $f,g \in H^2$, and write:</p>
+<center>$$ \langle T_{\varphi}^*(f), g \rangle = \langle f, T_\varphi(g) \rangle = \langle f, p(\varphi(g)) \rangle = \langle p(f), \varphi(g) \rangle $$ </center>
+<p>Now we utilize that $f, g \in H^2$, and so $p(f) = f$ and $p(g) =g$:</p>
+<center>$$ = \langle \overline{\varphi}f, p(g) \rangle = \langle p(\overline{\varphi}f), g \rangle $$ </center>
+<p>Thus $T_\varphi^* = T_{\overline{\varphi}}$, i.e. $\varphi \to T_\varphi$ also preserves adjoints.</p>
+
+<p>In general, however, we do not have that $T_{\varphi \psi} = T_\varphi T_\psi$. The following is therefore useful.</p>
+
+<p><strong>Theorem.</strong> Let $\varphi \in L^\infty$ and $\psi \in H^\infty$. Then,</p>
+<center> $$ T_{\varphi \psi} = T_\varphi T_\psi, \quad T_{\overline{\psi} \varphi} = T_{\overline{\psi}} T_\varphi $$ </center>
+
+<p><strong>Proof.</strong> Since $\psi \in H^\infty$, $\psi H^2 \subset H^2$, therefore $T_\varphi T_\psi (f) = p(\varphi p( \psi f)) = p (\varphi \psi f) = T_{\varphi \psi} (f)$. For the second identity, write $T_{\overline{\psi} \varphi}^* = T_{\overline{\varphi} \psi} = T_{\overline{\varphi}} T_{\psi}$, thus taking adjoints gives the result.</p>
+
+<h3 id="spectral-properties-of-toeplitz-operators">Spectral properties of Toeplitz operators</h3>
+
+<p><strong>Theorem.</strong> Let $\varphi \in L^\infty(\mathbb{T})$, and let $\sigma(\varphi)$ denote the spectrum of $\varphi$ in $L^\infty(\mathbb{T})$. Then, $\sigma(\varphi) \subset \sigma(T_\varphi)$.</p>
+
+<p><strong>Remark.</strong> Note $T_\psi - \lambda = T_{\psi - \lambda}$, so to prove this theorem, it is sufficient to prove that if $T_\psi$ is invertible, then so is $M_\psi$; as the map $\psi \mapsto M_\psi$ is an isometric *-homomorphism.</p>
+
+<p><strong>Proof.</strong> One way to prove that $M_\psi$ is invertible, is to prove that $M_\psi^* M_\psi$ is <em>strictly</em> positive (since $M_\psi$ is normal).
+Since $T_\psi$ is invertible, it is bounded below, so, for $f \in $, there is a constant $C &gt; 0$ such that  $T_\psi(f) \geq C \| f \|$. Note that for any $n \in \mathbb{Z}$, $\| M_\psi( \varepsilon_n f ) \| = \| \psi \varepsilon_n f \| = \| \psi f \| \geq \| T_\psi f \| \geq C \| f \| = C \| \varepsilon_n f \|$, so $M_\psi$ is bounded below on $L^\infty(\mathbb{T})$, as $\{ \varepsilon_n f \}_{n \in \mathbb{Z}}$ is dense in $L^2(\mathbb{T})$. Now, write</p>
+<center> finish this off! </center>
+
+<h2 id="nwe-title">nwe title?</h2>
+
+<p><strong>Definition.</strong> Let $\mathbf{A}$ denote the C*-algebra generated by all Toeplitz operators $T_\varphi$ with continuous symbol $\varphi$, called the <em>Toeplitz algebra</em>.</p>
+
+<p><strong>Lemma.</strong></p>
+
+<p><strong>Theorem.</strong> The commutator ideal of $\mathbf{A}$ is $K(H^2)$.</p>
+
+<p><strong>Theorem.</strong> The map</p>
+<center> $$\psi : C(\mathbf{T}) \to \mathbf{A} / K(H^2), \varphi \mapsto T_\varphi + K(H^2)$$ </center>
+<p>is a *-isomorphism.</p>
+
+<p>Recall the following theorem of Atkinson:</p>
+
+<p><strong>Theorem.</strong> Let X be an infinite-dimensional Banach space and let $u \in B(X)$. Then $u$ is Fredholm <em>iff</em> $u + K(X)$ is invertible in the quotient algebra $B(X)/K(X)$.</p>
+
+<p>Combining these two, we have the following corollaries.</p>
+
+<p><strong>Corollary.</strong> If $\varphi \in C(\mathbb{T})$, then $T_\varphi$ is Fredholm, <em>iff</em> $\varphi$ is nowhere vanishing.</p>
+
+<p><strong>Proof.</strong> We have that $T_\varphi$ is Fredholm iff $T_\varphi + K(H^2)$ is invertible in the quotient $B(H^2)/K(H^2)$, which is equivalent to $T_\varphi + K(H^2)$ being invertible in $\mathbf{A} / K(H^2)$. Since $\varphi \mapsto T_\varphi + K(H^2)$ is a *-isomorphism, this implies that $\varphi$ is invertible in $C(\mathbf{T})$.</p>
+
+<p>Why is invertibility in $B(H^2) + K(H^2)$ imply invertibility in $\mathbf{A} + K(H^2)$.</p>
+
+<hr />
+
+<p><strong>Lemma.</strong> Suppose that $\varphi$ is an invertible function in $C(\mathbb{T})$. Then, there is a unique $n \in \mathbb{Z}$ so that $\varphi = \varepsilon_n  e^\psi$ for some $\psi \in C(\mathbb{T})$.</p>
+
+<p><strong>Proof.</strong> Suppose that $\| 1- \varphi \| &lt; 1$. Then, we can take $\ln \circ \varphi$, where $\ln$ is the principal branch of the logarithm, as the criterion above ensures that this is well defined. Similarly, if $\varphi, \varphi’$ are both invertible in $C(\mathbb{T})$, such that $\| \varphi - \varphi’ \| &lt; \| \varphi^{-1} \|^{-1}$, then $\varphi’ = \varphi e^{\psi}$ for some $\psi \in C(\mathbb{T})$.<br />
+Suppose that $\varphi \in C(\mathbb{T})$ is invertible. Since $\Gamma$ is dense in $C(\mathbb{T})$, by the previous paragraph we may assume that $\varphi \in \Gamma$. Then, upon writing $\varphi = \sum_{n \leq N} \varepsilon_n \lambda_n$, we see that $\varepsilon_N \varphi \in \Gamma^+$, and therefore is a polynomial in $z = \varepsilon_1$, and therefore we can write $\varphi$ as a product of terms of the form $z - \lambda$, where $\lambda \notin \mathbb{T}$ (since $\psi$ invertible). Thus, it is enough to consider functions of the form $\varphi = z - \lambda$.<br />
+If $|\lambda| &lt; 1$, then $\| \varphi - z \| = | \lambda | $, and therefore $\varphi = z e^{\psi}$ for some $\psi \in C(\mathbb{T})$. If $|\lambda | &gt; 1$, we have that $\| (1- \lambda^{-1} z) -1 \| &lt; 1$, and therefore $1 - \lambda^{-1} z$ is of the form $e^{\psi}$ for some $\psi \in C(\mathbb{T})$. From this it follows that any invertible $\varphi \in C(\mathbf{T})$ can be written in the desired form.<br />
+To prove uniqueness it is enough to prove that if $\varepsilon_n$ is of the form $e^\psi$, then $n=0$. Suppose then, that $\varepsilon_n = e^\psi$, and consider the map</p>
+<center> $$[0,1] \to \mathbb{Z}, \quad t \mapsto \text{ind}(T_{e^{t \psi}})$$ </center>
+<p>This function is continuous, with a discrete range and connected domain, and therefore is constant. From this we conclude that $0 = \text{ind}(1) = \alpha(0) = \alpha(1) = \text{ind}(T_{e^\psi}) = \text{ind}(\varepsilon_n) = -n$, hence $n = 0$, as required.</p>
+
+<p><strong>Remark.</strong> The unique number from the previous lemma is called the <em>winding number</em> of $\varphi$ with respect to the origin, denoted $\text{wn}(\varphi)$.</p>
+
+<p><strong>Theorem.</strong> Let $\varphi$ be an invertible element in $C(\mathbb{T})$. Then, $\text{ind}(T_\varphi) = - \text{wn}(\varphi)$. Moreover, $T_\varphi$ is invertible <em>iff</em> it is of Fredholm index $0$, <em>iff</em> $\varphi = e^\psi$ for some $\psi \in C(\mathbb{T})$.</p>]]></content><author><name>Gergo Stomfai</name><email>stomfaig@gmail.com</email></author><category term="misc" /><summary type="html"><![CDATA[Disclaimer: My notes heavily influenced by ‘An introduction to the theory of C*-algebras’ by G. J. Murphy, and many proofs and developments are the exact ones in the book. These documents are intended to help for those reading the book, by providing more detail in some cases, or by organizing the material in a different way.]]></summary></entry><entry><title type="html">Characters, states and Gelfand-Naimark</title><link href="http://localhost:4000/misc/2024/06/23/linear-functionals.html" rel="alternate" type="text/html" title="Characters, states and Gelfand-Naimark" /><published>2024-06-23T00:00:00+01:00</published><updated>2024-06-23T00:00:00+01:00</updated><id>http://localhost:4000/misc/2024/06/23/linear-functionals</id><content type="html" xml:base="http://localhost:4000/misc/2024/06/23/linear-functionals.html"><![CDATA[<p>In this article, I intend to give a dense, but complete account on how one might derive the Gelfand-Naimark representation theorem. The discussion involves some parts of character theory on Banach algebras, and a fair bit of work on states in a C*-algebra.</p>
+
+<p><em>Disclaimer: My notes heavily influenced by ‘An introduction to the theory of C*-algebras’ by G. J. Murphy, and many proofs and developments are the exact ones in the book. These documents are intended to help for those reading the book, by providing more detail in some cases, or by organizing the material in a different way.</em></p>
+
+<p><em>This article is not complete yet</em></p>
+
+<hr />
+
+<p>In another article I’ve already exhibited how one might construct the continuous functional calculus of an Abelian Banach algebra. In the non-commutative case this construction breaks down. Now we will investigate how one might obtain some representation results more generally.</p>
+
+<h2 id="characters">Characters.</h2>
+
+<p><em>This section is in tended to capture the following topics: Definition of a character, $\tau(1) = 1$  d</em></p>
+
+<p>Let’s start in the abelian case.</p>
+
+<p><strong>Definition 1.</strong> Let $A$ be an abelian Banach algebra. A <em>character</em> on $A$ is a non-zero homomorphism $\tau: A \to \mathbb{C}$.</p>
+
+<p>One can define the space $\Omega(A)$ of all characters on a Banach algebra $A$, and give it the weak-* topology that arises from $A$. We can define the <em>Gelfand representation</em> of $a \in A$, by
+$\widehat{\cdot}: A \to C_0(\Omega(A)), \quad \widehat{a}(\tau) = \tau(a)$</p>
+
+<p>We note a few important features of characters.</p>
+
+<ol>
+  <li>Since $\tau(1^2) = \tau(1)^2$, we have $\tau(1) = 0$ or $1$. However, since $\tau \neq 0$, we must have $\tau(1) =1$.</li>
+  <li>Every character $\tau$ has $| \tau| = 1$.</li>
+</ol>
+
+<h2 id="states">States.</h2>
+
+<p><em>This section is intended to discuss the following topics: extension of character  d</em></p>
+
+<p><strong>Definition.</strong> A a linear map $\varphi: A \to B$ between C*-algebras is <em>positive</em>, if $\varphi(A^+) \subseteq B^+$.</p>
+
+<p>Suppose that $\varphi: A \to \mathbb{R}$ is a positive linear functional. Then, the map<br />
+\(A^2 \to \mathbb{C}, \quad (a,b) \to \varphi(b^*a)\)<br />
+is a sesquilinear form, further $(a,a) = \varphi(a^*a) \in \mathbb{R}^+$ (since $a^*a \in A^+ \ \forall a \in A$). Let $(a,b) = \alpha + i \beta$, and $(b,a )= \alpha’ + i \beta’$ Then,<br />
+\((a+b, a+b) = (a, a)+ (a, b) + (b, a) + (b,b) \in \mathbb{R}\)<br />
+since $(a,a), (b,b) \in \mathbb{R}^+$ as well, we must have $\beta = - \beta’$. <em>missing things</em><br />
+We also note that the Cauchy-Swartz inequality holds for $(\cdot, \cdot)$, by the usual proof.</p>
+
+<p>The following lemma is really useful for determining whether a linear function is positive or not.</p>
+
+<p><strong>Lemma.</strong> Suppose that $\varphi$ is a bounded linear functional on the C*-algebra $A$, and let  be an  in $A$. Then, the following are equivalent.</p>
+<ol>
+  <li>$\varphi$ is positive,</li>
+  <li>For any approximate unit $(u_\lambda)_{\lambda \in \Lambda} $ in $A$, $\lim_{\lambda} \varphi(u_\lambda) = \| u \|$,</li>
+  <li>For some approximate unit $(u_\lambda)_{\lambda \in \Lambda} $ in $A$, $\lim_{\lambda} \varphi(u_\lambda) = \| u \|$.</li>
+</ol>
+
+<p><strong>Proof.</strong> Without loss of generality we may assume that $\| \varphi \| = 1$.<br />
+$(1) \implies (2)$: Suppose that (1) holds, and let $(u_\lambda)_{\lambda \in \Lambda}$ be an approximate unit for $A$. Then, clearly $\lim_\lambda \varphi(u_\lambda) \leq 1$. Now, let $a \in \lambda$ with $\| a \| \leq 1$. Then,<br />
+\(| \varphi(u_\lambda a)|^2 \leq \varphi(u_\lambda ^2) \varphi(a^* a) \leq \varphi(u_\lambda) \leq \lim_\lambda \varphi(u_\lambda)\)<br />
+Since $(\varphi(u_\lambda))_\lambda$ is an increasing sequence in $\mathbb{R}$, the limit on the right-hand side is finite.<br />
+$(2) \implies (3)$ is clearly true.</p>
+
+<p>We will make good use of the following corollary.</p>
+
+<p><strong>Corollary.</strong> A linear functional $\varphi$ on a C*-algebra $A$ is positive <em>iff</em> $\| \varphi \| = | \varphi(1) |$</p>
+
+<p>By a <em>state</em> on a C*-algebra we mean a positive linear functional $\varphi$, so that $\| \varphi \| = 1$. Using the previous corollary, we get the following <em>almost</em> for free.</p>
+
+<p><strong>Proposition.</strong> Let $A$ be a unital C*-algebra, and $a \in A$ normal. Then, there is a state $\varphi$ on $A$ so that $\| a \| = \varphi(a)$.</p>
+
+<p><strong>Proof.</strong> Consider the C*-algebra $B$ generated by $\mathbf1$ and $a$. Since $a$ normal, $B$ is abelian, thus by Gelfand representation $\| \widehat{a} \|_\infty = \| a \|$, where $\widehat{a}: \Omega(B) \to \mathbb{C}$ is a continuous function, and $\Omega(B)$ is compact. Therefore we can find a character $\tau \in \Omega(A)$ so that $\tau(a) = \| a \|$, and we know that $\tau(\mathbf1) = 1 = |\tau|$, and $\tau$ is clearly linear and bounded, so by the preceding Corollary $\tau$ is a state on $B$.<br />
+By the Hanh-Banach theorem we might extend $\tau$ to $A$, while preserving its norm, to say $\tau’$. Now, $\tau’$ is clearly linear and bounded, further $ \tau’(\mathbf1) = \tau(\mathbf1) = \| \tau \| = \| \tau’ \|$, therefore $\tau’$ is positive. Clearly $\tau(a) = \| a \|$.</p>
+
+<p><strong>Remark.</strong> This proof goes through even in the non-unital case, by considering the unitisation of $A$ and $B$.</p>]]></content><author><name>Gergo Stomfai</name><email>stomfaig@gmail.com</email></author><category term="misc" /><summary type="html"><![CDATA[In this article, I intend to give a dense, but complete account on how one might derive the Gelfand-Naimark representation theorem. The discussion involves some parts of character theory on Banach algebras, and a fair bit of work on states in a C*-algebra.]]></summary></entry><entry><title type="html">1. Holomorphic and Functional Calculi</title><link href="http://localhost:4000/projects/oa-calc/2024/06/23/on-calc-1.html" rel="alternate" type="text/html" title="1. Holomorphic and Functional Calculi" /><published>2024-06-23T00:00:00+01:00</published><updated>2024-06-23T00:00:00+01:00</updated><id>http://localhost:4000/projects/oa-calc/2024/06/23/on-calc-1</id><content type="html" xml:base="http://localhost:4000/projects/oa-calc/2024/06/23/on-calc-1.html"><![CDATA[<p>In this series, I intend to summarize how different functional calculi are consructed, and aim to provide some motivations why they are useful. In this first article, I am mainly concerned with developing the theory of the holomorphic and continuous functional calculi.</p>
+
+<p><em>Disclaimer: My notes heavily influenced by ‘An introduction to the theory of C*-algebras’ by G. J. Murphy, and many proofs and developments are the exact ones in the book. These documents are intended to help for those reading the book, by providing more detail in some cases, or by organizing the material in a different way.</em></p>
+
+<p><em>This article is not complete yet</em></p>
+
+<hr />
+
+<p>Let $\Omega$ be a compact Hausdorff topological space, and consider the Banach algebra $C(\Omega)$ with involution given by complex conjugation. This space is a C* algebra. There are many prototypical properties of this space, that are really useful and intuitive, when one works with elements of this algebra. Let us take a look at few of these.</p>
+
+<p>Given $f \in C(\Omega)$, we say that $f$ is positive, if $f(\omega) \in \mathbb{R}$ and $f(\omega) \geq 0 \forall \omega \in \Omega$. Denote by $C(\Omega)^+$  the set of positive function. This class of functions is really well behaved.</p>
+
+<ol>
+  <li>Consider $f \in C(\Omega)$ such that $f(\omega) \in \mathbb{R} \ \forall \omega \in \Omega$. These are the self adjoint elements of $C(\Omega)$ Then, one can set $f^+ = f \vee 0$ and $f^- = (-f) \vee 0$, to obtain $f^-, f^+ \in C^+(\Omega)$ so that $f= f^+ + f^-$. Given an arbitrary $f \in C(\Omega)$, we can decompose $f$ into real and imaginary parts, upon considering $\frac{1}{2}(f^* + f)$ and $\frac{1}{2i} ( f^* - f)$. Both of these are self-adjoint, and thus real valued.<br />
+From see that any property that can be proven for arbitrary positive functions, and is preserved under vectorspace operations is true for the whole C*-algebra $C(\Omega)$. (Note that $C(\Omega)$ is a C* algebra is crucial here: we made use of the involution operation, to deconstruct $f$ into self-adjoint parts.)</li>
+  <li>Many convenient tools are available when working over the functions $C(\Omega)^+$. We can take square roots, for example. It is highly non-trivial at this stage how to do this over a Banach or C*-algebra.</li>
+  <li>positivity criteria</li>
+  <li>Consider $f \in C(\Omega)$, and suppose that the support $\text{supp}(f)$ is a proper closed subset of $\Omega$. Then, by Urysohn’s lemma, there is $0 \neq g \in C(\Omega)$ so that $fg = 0$.</li>
+</ol>
+
+<p>When working in Banach algebras, it is often convenient, to</p>
+
+<h2 id="holomorphic-functional-calculus">Holomorphic functional calculus.</h2>
+<p>Let $A$ be a Banach algebra, and let $a \in A$. Further, let $f: \mathbb{C} \to \mathbb{C}$ be a holomorphic function.</p>
+
+<h2 id="gelfand-representations">Gelfand representations.</h2>
+
+<p>In this section we continually assume that $A$ is abelian.</p>
+
+<p><strong>Definition</strong>. A <em>character</em> on a Banach algebra $A$ is a homomorphism $\tau: A \to \mathbb{C}$. We denote by $\Omega(A)$ the set of all characters on $A$.</p>
+
+<p>Characters can be thought of as a generaliazation of the spectrum of an element:</p>
+
+<p><strong>Theorem 1.</strong> Let $A$ be an abelian Banach algebra. If $A$ is unital, $\sigma(a) = \{ \tau(a): \tau \in \Omega(A) \}$, while if $A$ non-unital, then $\sigma(a) = {0 } \cup {\tau(a): \tau \in \Omega(A) }$ $\forall a \in A$.</p>
+
+<p><strong>Proof</strong>.</p>
+
+<p>We define the <em>Gelfand representation</em> $\widehat{a}$ of an element $a \in A$ as follows:<br />
+\(\widehat{a} : \Omega(A) \to \mathbb{C} \quad \widehat{a}(\tau) = \tau(a)\)</p>
+
+<p>Notice that the function $\widehat{a}$ is continuous of compact support. Indeed, if $\tau_n \to \tau$, then $\tau_n(a) \to \tau(a)$, since $\Omega(A)$ has the weak-* topology, and therefore $\widehat{a}(\tau_n) \to \widehat{a}(\tau)$. Further, given $\epsilon &gt; 0$ and consider the set $\{ \widehat{a}(\tau) &gt; \epsilon : \tau \in \Omega(A) \}$</p>
+
+<p>Now we are ready for the definitive result of Gelfand representations.</p>
+
+<p><strong>Theorem</strong>. The map $\widehat{\cdot}: A \to C_0(A)$ is a norm-decreasing homomorphism, with $\| \widehat{a}\|_\infty = r(a)$.</p>
+
+<p>In the case when $A$ is a C*-algebra, we can say even more. Indeed, suppose that $\phi$ is *-homomorphism. Then, using the C* identity $\| a \|^2 = \| a^* a \|$ in $\mathbb{C}$,<br />
+\(\| \phi(a)\|^2=\|\phi(a)^* \phi(a) \| = \| \phi(a^* a ) \| = r(a^*a)\)<br />
+Since $a^* a$ is self-adjoint, we have that $ r(a^*a) =a^* a $, and therefore $\| \phi(a) \|_\infty = \| a \| $. One can easily prove that the Gelfand representation is itself a *-homomorphism, and therefore an isometry. Note further, that $\widehat{\cdot} : A \to C_0(\Omega(A))$ is an isomorphism, since the image $\widehat{A}$ is dense in $C_0(\Omega(A))$ by the Stone-Weierstrass theorem. Combining all these results, we obtain the following</p>
+
+<p><strong>Theorem 2.</strong> Let $A$ be an abelian C*-algebra. Then, the Gelfand representation $\widehat{\cdot} : A \to C_0(\Omega)$ is an isometric *-isomorphism.</p>
+
+<h2 id="the-functional-calculus">The functional calculus.</h2>
+
+<p>We use the results from the previous section, to prove the following theorem.</p>
+
+<p><strong>Theorem</strong>. Let $a$ be a normal element of a unital C*-algebra $A$, and suppose that $z$ is the inclusion map $z: \sigma(a) \to \mathbb{C}$. Then, there is a unique unital *-homomorphism $\varphi: C_0(\sigma(a)) \to A$ such that $\varphi(z) = a$. In fact $\varphi$ is isometric.</p>
+
+<p>All the previous results are only true in abelian Banach algebras and C*-algebras. Given a normal element $a \in A$, the C*-algebra $B=C^*(a)$ generated by $\mathbf1$ and $a$ is unital and abelian, which puts us in a good position to apply Theorem 2. We still have some work to do however.</p>
+
+<p><strong>Lemma.</strong> If $A$ is a unital Banach algebra generated by $\mathbf1$ and some $a \in A$. Then, $\widehat{a}:\Omega(A) \to \sigma(a)$ is a homeomorphism.</p>
+
+<p><strong>Proof.</strong> First of all, observe that $\widehat{\cdot}$ is a bijection: if two characters $\tau, \mu \in \Omega(A)$ agree on $a$, then $\tau = \mu$, since $a$ generates $A$. Further, $\widehat{a}$ is clearly surjective by Theorem 1. Since $\widehat{a}$ is a bijection between locally compact Hausdorff spaces, it is a homeomorphism.</p>
+
+<p><strong>Corollary.</strong> isomorphism when C*</p>
+
+<p><strong>Lemma.</strong> If $A$ is a unital C*-algebra, and $B$ is a C*-subalgebra of $A$ containing the unit of $A$, then<br />
+\(\sigma_B(b) = \sigma_A(b) \quad \forall b \in B\)</p>
+
+<p><strong>Proof.</strong></p>
+
+<p>Now, consider the Gelfand representation $\psi: B \to C(\Omega(B))$, which is a *-isomorphism. Given $\widehat{a} : \Omega(B) \to \sigma(a)$, which is an isomorphism, so $\widehat{a}^t:C(\sigma(a)) \to C(\Omega(B))$ given by<br />
+\(\widehat{a}^t: C(\sigma(a)) \to C(\Omega(B)), \quad f \mapsto f \circ \theta\)<br />
+is another isomorphism. Therefore $\varphi: C(\sigma(a)) \to A$ given by $\varphi = \psi^{-1} \circ \widehat{a}^t$ is exactly the map we  are looking for.</p>
+
+<h2 id="applications">Applications</h2>]]></content><author><name>Gergo Stomfai</name><email>stomfaig@gmail.com</email></author><category term="projects" /><category term="oa-calc" /><summary type="html"><![CDATA[In this series, I intend to summarize how different functional calculi are consructed, and aim to provide some motivations why they are useful. In this first article, I am mainly concerned with developing the theory of the holomorphic and continuous functional calculi.]]></summary></entry></feed>

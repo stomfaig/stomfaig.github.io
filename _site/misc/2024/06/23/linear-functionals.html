@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Characters, states and Gelfand-Naimark | asd</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Characters, states and Gelfand-Naimark" />
+<meta name="author" content="Gergo Stomfai" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="In this article, I intend to give a dense, but complete account on how one might derive the Gelfand-Naimark representation theorem. The discussion involves some parts of character theory on Banach algebras, and a fair bit of work on states in a C*-algebra." />
+<meta property="og:description" content="In this article, I intend to give a dense, but complete account on how one might derive the Gelfand-Naimark representation theorem. The discussion involves some parts of character theory on Banach algebras, and a fair bit of work on states in a C*-algebra." />
+<link rel="canonical" href="http://localhost:4000/misc/2024/06/23/linear-functionals.html" />
+<meta property="og:url" content="http://localhost:4000/misc/2024/06/23/linear-functionals.html" />
+<meta property="og:site_name" content="asd" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-06-23T00:00:00+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Characters, states and Gelfand-Naimark" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Gergo Stomfai"},"dateModified":"2024-06-23T00:00:00+01:00","datePublished":"2024-06-23T00:00:00+01:00","description":"In this article, I intend to give a dense, but complete account on how one might derive the Gelfand-Naimark representation theorem. The discussion involves some parts of character theory on Banach algebras, and a fair bit of work on states in a C*-algebra.","headline":"Characters, states and Gelfand-Naimark","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/misc/2024/06/23/linear-functionals.html"},"url":"http://localhost:4000/misc/2024/06/23/linear-functionals.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="asd" />
+</head>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script
+  type="text/javascript"
+  charset="utf-8"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+>
+</script>
+<script
+  type="text/javascript"
+  charset="utf-8"
+  src="https://vincenttam.github.io/javascripts/MathJaxLocal.js"
+>
+</script>
+
+
+  <body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">asd</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Characters, states and Gelfand-Naimark</h1>
+    <p class="post-meta"><time class="dt-published" datetime="2024-06-23T00:00:00+01:00" itemprop="datePublished">
+        Jun 23, 2024
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>In this article, I intend to give a dense, but complete account on how one might derive the Gelfand-Naimark representation theorem. The discussion involves some parts of character theory on Banach algebras, and a fair bit of work on states in a C*-algebra.</p>
+
+<p><em>Disclaimer: My notes heavily influenced by ‘An introduction to the theory of C*-algebras’ by G. J. Murphy, and many proofs and developments are the exact ones in the book. These documents are intended to help for those reading the book, by providing more detail in some cases, or by organizing the material in a different way.</em></p>
+
+<p><em>This article is not complete yet</em></p>
+
+<hr />
+
+<p>In another article I’ve already exhibited how one might construct the continuous functional calculus of an Abelian Banach algebra. In the non-commutative case this construction breaks down. Now we will investigate how one might obtain some representation results more generally.</p>
+
+<h2 id="characters">Characters.</h2>
+
+<p><em>This section is in tended to capture the following topics: Definition of a character, $\tau(1) = 1$  d</em></p>
+
+<p>Let’s start in the abelian case.</p>
+
+<p><strong>Definition 1.</strong> Let $A$ be an abelian Banach algebra. A <em>character</em> on $A$ is a non-zero homomorphism $\tau: A \to \mathbb{C}$.</p>
+
+<p>One can define the space $\Omega(A)$ of all characters on a Banach algebra $A$, and give it the weak-* topology that arises from $A$. We can define the <em>Gelfand representation</em> of $a \in A$, by
+$\widehat{\cdot}: A \to C_0(\Omega(A)), \quad \widehat{a}(\tau) = \tau(a)$</p>
+
+<p>We note a few important features of characters.</p>
+
+<ol>
+  <li>Since $\tau(1^2) = \tau(1)^2$, we have $\tau(1) = 0$ or $1$. However, since $\tau \neq 0$, we must have $\tau(1) =1$.</li>
+  <li>Every character $\tau$ has $| \tau| = 1$.</li>
+</ol>
+
+<h2 id="states">States.</h2>
+
+<p><em>This section is intended to discuss the following topics: extension of character  d</em></p>
+
+<p><strong>Definition.</strong> A a linear map $\varphi: A \to B$ between C*-algebras is <em>positive</em>, if $\varphi(A^+) \subseteq B^+$.</p>
+
+<p>Suppose that $\varphi: A \to \mathbb{R}$ is a positive linear functional. Then, the map<br />
+\(A^2 \to \mathbb{C}, \quad (a,b) \to \varphi(b^*a)\)<br />
+is a sesquilinear form, further $(a,a) = \varphi(a^*a) \in \mathbb{R}^+$ (since $a^*a \in A^+ \ \forall a \in A$). Let $(a,b) = \alpha + i \beta$, and $(b,a )= \alpha’ + i \beta’$ Then,<br />
+\((a+b, a+b) = (a, a)+ (a, b) + (b, a) + (b,b) \in \mathbb{R}\)<br />
+since $(a,a), (b,b) \in \mathbb{R}^+$ as well, we must have $\beta = - \beta’$. <em>missing things</em><br />
+We also note that the Cauchy-Swartz inequality holds for $(\cdot, \cdot)$, by the usual proof.</p>
+
+<p>The following lemma is really useful for determining whether a linear function is positive or not.</p>
+
+<p><strong>Lemma.</strong> Suppose that $\varphi$ is a bounded linear functional on the C*-algebra $A$, and let  be an  in $A$. Then, the following are equivalent.</p>
+<ol>
+  <li>$\varphi$ is positive,</li>
+  <li>For any approximate unit $(u_\lambda)_{\lambda \in \Lambda} $ in $A$, $\lim_{\lambda} \varphi(u_\lambda) = \| u \|$,</li>
+  <li>For some approximate unit $(u_\lambda)_{\lambda \in \Lambda} $ in $A$, $\lim_{\lambda} \varphi(u_\lambda) = \| u \|$.</li>
+</ol>
+
+<p><strong>Proof.</strong> Without loss of generality we may assume that $\| \varphi \| = 1$.<br />
+$(1) \implies (2)$: Suppose that (1) holds, and let $(u_\lambda)_{\lambda \in \Lambda}$ be an approximate unit for $A$. Then, clearly $\lim_\lambda \varphi(u_\lambda) \leq 1$. Now, let $a \in \lambda$ with $\| a \| \leq 1$. Then,<br />
+\(| \varphi(u_\lambda a)|^2 \leq \varphi(u_\lambda ^2) \varphi(a^* a) \leq \varphi(u_\lambda) \leq \lim_\lambda \varphi(u_\lambda)\)<br />
+Since $(\varphi(u_\lambda))_\lambda$ is an increasing sequence in $\mathbb{R}$, the limit on the right-hand side is finite.<br />
+$(2) \implies (3)$ is clearly true.</p>
+
+<p>We will make good use of the following corollary.</p>
+
+<p><strong>Corollary.</strong> A linear functional $\varphi$ on a C*-algebra $A$ is positive <em>iff</em> $\| \varphi \| = | \varphi(1) |$</p>
+
+<p>By a <em>state</em> on a C*-algebra we mean a positive linear functional $\varphi$, so that $\| \varphi \| = 1$. Using the previous corollary, we get the following <em>almost</em> for free.</p>
+
+<p><strong>Proposition.</strong> Let $A$ be a unital C*-algebra, and $a \in A$ normal. Then, there is a state $\varphi$ on $A$ so that $\| a \| = \varphi(a)$.</p>
+
+<p><strong>Proof.</strong> Consider the C*-algebra $B$ generated by $\mathbf1$ and $a$. Since $a$ normal, $B$ is abelian, thus by Gelfand representation $\| \widehat{a} \|_\infty = \| a \|$, where $\widehat{a}: \Omega(B) \to \mathbb{C}$ is a continuous function, and $\Omega(B)$ is compact. Therefore we can find a character $\tau \in \Omega(A)$ so that $\tau(a) = \| a \|$, and we know that $\tau(\mathbf1) = 1 = |\tau|$, and $\tau$ is clearly linear and bounded, so by the preceding Corollary $\tau$ is a state on $B$.<br />
+By the Hanh-Banach theorem we might extend $\tau$ to $A$, while preserving its norm, to say $\tau’$. Now, $\tau’$ is clearly linear and bounded, further $ \tau’(\mathbf1) = \tau(\mathbf1) = \| \tau \| = \| \tau’ \|$, therefore $\tau’$ is positive. Clearly $\tau(a) = \| a \|$.</p>
+
+<p><strong>Remark.</strong> This proof goes through even in the non-unital case, by considering the unitisation of $A$ and $B$.</p>
+
+
+  </div>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script
+  type="text/javascript"
+  charset="utf-8"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+>
+</script>
+<script
+  type="text/javascript"
+  charset="utf-8"
+  src="https://vincenttam.github.io/javascripts/MathJaxLocal.js"
+>
+</script>
+
+
+  <a class="u-url" href="/misc/2024/06/23/linear-functionals.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="http://localhost:4000/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+        <ul class="contact-list">
+          <li class="p-name">Gergo Stomfai</li>
+          <li><a class="u-email" href="mailto:stomfaig@gmail.com">stomfaig@gmail.com</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p>-
+</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
