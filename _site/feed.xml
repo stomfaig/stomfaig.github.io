@@ -1,5 +1,113 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-06-27T15:53:19+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">asd</title><subtitle>-
-</subtitle><author><name>Gergo Stomfai</name><email>stomfaig@gmail.com</email></author><entry><title type="html">A brief summary of Compact and finite rank operators</title><link href="http://localhost:4000/misc/2024/06/26/low-rank-operators.html" rel="alternate" type="text/html" title="A brief summary of Compact and finite rank operators" /><published>2024-06-26T00:00:00+01:00</published><updated>2024-06-26T00:00:00+01:00</updated><id>http://localhost:4000/misc/2024/06/26/low-rank-operators</id><content type="html" xml:base="http://localhost:4000/misc/2024/06/26/low-rank-operators.html"><![CDATA[<p><em>Disclaimer: My notes heavily influenced by ‘An introduction to the theory of C*-algebras’ by G. J. Murphy, and many proofs and developments are the exact ones in the book. These documents are intended to help for those reading the book, by providing more detail in some cases, or by organizing the material in a different way.</em></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-06-29T15:29:49+01:00</updated><id>http://localhost:4000/feed.xml</id><subtitle>-
+</subtitle><author><name>Gergo Stomfai</name><email>stomfaig@gmail.com</email></author><entry><title type="html">2. Borel functional calculus</title><link href="http://localhost:4000/projects/oa-calc/2024/06/28/on-calc-2.html" rel="alternate" type="text/html" title="2. Borel functional calculus" /><published>2024-06-28T00:00:00+01:00</published><updated>2024-06-28T00:00:00+01:00</updated><id>http://localhost:4000/projects/oa-calc/2024/06/28/on-calc-2</id><content type="html" xml:base="http://localhost:4000/projects/oa-calc/2024/06/28/on-calc-2.html"><![CDATA[<p>In this series, I intend to summarize how different functional calculi are consructed, and aim to provide some motivations why they are useful. In this article, I am going to go through the theory of spectral measures and the arising Borel functional calculus on C*-algebras.</p>
+
+<p><em>Disclaimer: My notes heavily influenced by ‘An introduction to the theory of C*-algebras’ by G. J. Murphy, and many proofs and developments are the exact ones in the book. These documents are intended to help for those reading the book, by providing more detail in some cases, or by organizing the material in a different way.</em></p>
+
+<hr />
+
+<p>Let’s start by a somewhat alien definition at first sight.</p>
+
+<p><strong>Definition.</strong> Let $\Omega$ be a compact, Hausdorff space, and $H$ a Hilbert space. A <em>spectral measure</em> $E$ relative to $(\Omega, E)$ is a map from the $\sigma$-algebra of all Borel sets of $\Omega$ to the set of projections in $B(H)$ such that</p>
+<ol>
+  <li>$E(\emptyset) = 0$ and $E(\Omega) = \mathbf1$,</li>
+  <li>$E(S_1 \cap S_2) = E(S_1) E(S_2)$ for all Borel sets $S_1, S_2 \subseteq \Omega$,</li>
+  <li>For all $x, y \in H$, the function $E_{x,y}: S \mapsto \langle E(S)x, y \rangle$ is a regular Borel complex measure on $\Omega$.</li>
+</ol>
+
+<p>This definition can feel quite odd. To some extend, it resembles the properties that an ordinary measure would have, but on the other hand its values are projections, which makes it really hard to think of it in terms of ‘integrating over projections’. I find it helpful to think of this definition keeping in mind the <em>end goal</em>: we’d like to obtain a way, in which we can associate functions in $B(\Omega)$ with elements of $U$, that in certain way behave the same way.</p>
+
+<p>In what follows, we will proceed with results that are analogous of developing results in measure theory.</p>
+
+<p><strong>Lemma 1.</strong> Let $\Omega$ be a compact Hausdorff space, let $H$ be a Hilbert space, and suppose that $\mu_{x,y} \in M(\Omega)$ for all $x,y \in H$. Suppose also for each Borel set $S \subset \Omega$, the function</p>
+<center> $$\sigma_S: H^2 \to \mathbb{C}, \quad (x,y) \mapsto \mu_{x,y}(S)$$ </center>
+<p>is a sesquilinear form. Then, for each $f \in B_\infty(\Omega)$, the function</p>
+<center> $$\sigma_S: H^2 \to \mathbb{C}, \quad (x,y) \mapsto \int f d \mu_{x,y}$$ </center>
+<p>is also a sesquilinear form.</p>
+
+<p><strong>Proof.</strong> <em>Coming soon</em> $\blacksquare$</p>
+
+<p><strong>Lemma 2.</strong> Let $\Omega$ be a compact Hausdorff space, $H$ a Hilbert space, and $E$ a spectral measure relative to $(\Omega, H)$. Then, for each $f \in B_\infty(\Omega)$, the function</p>
+<center> $$ \sigma_f: H^2 \to \mathbb{C}, \quad (x,y) \mapsto \int f d E_{x,y} $$ </center>
+<p>is a bounded sesquilinear form on $H$, with $\| \sigma_f \| \leq \| f \|_\infty$.</p>
+
+<p><strong>Proof.</strong> Note that to prove that $\sigma$ is a sesquilinear form, all work has been done in the definition in the spectral measure, and the previous lemma. Since $E_{x,y}(S) = \langle E(S) x, y \rangle$, ‘$\sigma_S$’ (defined in the same way as in the preceding lemma) is a sesquilinear form, thus so is $\sigma_f$.<br />
+<em>The rest of the proof is coming soon.</em> $\blacksquare$</p>
+
+<p>The theory of sesquilinear forms is well-understood. In fact, we have the following.</p>
+
+<p><strong>Lemma 3.</strong> Let $\sigma$ be a bounded sesquilinear form on a Hilbert space $H$. Then there is a unique operator $u \in H$, such that $\| u \| = \| \sigma \|$, and</p>
+<center> $$\sigma(x,y) = \langle u(x), y \rangle \quad \forall x,y \in H $$ </center>
+
+<p><strong>Proof.</strong> Fix $y \in H$ and consider the map $x \mapsto \sigma(x,y)$. This is clearly bounded (as $\sigma$ bounded) and linear (as $\sigma$ linear in the first coordinate). Thus, by the Riesz Representation theorem, there is a unique $v(y) \in H$ such that $\sigma(x, y) = \langle x, v(y) \rangle, \ \forall x \in H$.<br />
+Noting that $\sigma$ is anti-linear in the second argument, we see that $v$ is an anti-linear map, from which $u = v^*$ is linear, and</p>
+<center> $$\sigma(x,y) = \langle x, v(y) \rangle = \langle u(x), y \rangle$$ </center>
+<p><em>prove the norm equality</em> $\blacksquare$</p>
+
+<p>Combining these last two results, given a compact Hausdorff space $\Omega$, a Hilbert space $H$, and a spectral measure $E$ on $(\Omega, E)$, we immediately see that for each $f \in B_\infty(\Omega)$, there is a unique bounded operator $u \in B(H)$ such that $\langle u(x), y \rangle = \int f d E_{x,y}$. We therefore define the <em>integral of f</em> with respect to $E$: $\int f d E = u$.</p>
+
+<p>Let $S \subset \Omega$ be a Borel subset. Then, $\int \chi_S d E_{x,y} = E_{x,y}(S) = \langle E(S) x, y \rangle$, from which it follows that $\int \chi_S dE = E(S)$.</p>
+
+<p>Let us take a moment to take stock of what happened so far. We took a <em>spectral measure</em>, and considered its different ‘cross sections’ along different pairs of elements $x, y \in H$. We observed that, for each fixed $f \in B_\infty(\Omega)$ it can be represented using a single operator $u \in B(H)$. We associated this element to be the integral of $f$ with respect to the spectral measure $E$. We now turn to show that this mapping is ‘interesting’.</p>
+
+<p><strong>Theorem 4.</strong> With the same assumptions on $\Omega, H$ and $E$, as in the prequel, the map</p>
+<center> $$ \varphi: B_\infty(\Omega) \to B(H), \quad f \mapsto \int f d E $$ </center>
+<p>is a unital *-homomorphism.</p>
+
+<p><strong>Proof.</strong> To see that the mapping is linear, suppose that $f, g \in B_\infty(\Omega)$. Then, there are elements $u, v \in B(H)$ such that $\int f dE_{x,y} = \langle u(x), y \rangle$ and $\int f dE_{x,y} = \langle v(x), y \rangle, \forall x, y \in H$. Now, using the linearity of the integral:</p>
+<center> $$ \int f+g dE_{x,y} = \int f dE_{x,y} + \int g dE_{x,y} = \langle u(x), y \rangle + \langle v(x), y \rangle = \langle (u+v)(x), y \rangle \quad \forall x,y \in H$$ </center>
+<p>From Lemmas 2 and 3 it follows that $\int f+g dE = u + v$ (since it is the unique element that induces the right sesquilinear form). Boundedness also follows from the lemmas already mentioned.<br />
+To show that $\phi(fg) = \phi(f) \phi(g)$, and that $\phi( \overline{f}) = \phi(f)^*$, it is sufficient to prove this over indicator functions of Borel measurable sets, as simple functions are dense in $B_\infty(\Omega)$. Let $f = \chi_S, g = \chi_{S’}$. Then,</p>
+<center> $$\int \chi_S \chi_{S'} dE = \int \chi_{S \cap S'} dE \stackrel{1.}{=} E(S \cap S') \stackrel{2.}{=} E(S)E(S')$$ </center>
+<p>Where $1.$ follows from the discussion before Theorem 4, and $2.$ follows from property (2) of the spectral measure. The *-property is even simpler:</p>
+<center> $$\varphi(\overline{\chi_S}) = \varphi( \chi_S) = E(S) = E(S)^* $$ </center>
+<p>Where the second equality follows from the fact that $E(S)$ is a projection by the definition of the spectral measure.  $\blacksquare$</p>
+
+<p><strong>Remark.</strong> From the proof of this theorem we get several ‘explanations’ about spectral measures.</p>
+
+<p>Now we go even further, and claim that every unital *-homomorphism $\phi: C(\Omega) \to B(H)$ is induced by integrating against a spectral measure:</p>
+
+<p><strong>Theorem 5.</strong> Let $\Omega$ be a compact Hausdorff space, $H$ a Hilbert space, and suppose that $\varphi: C(\Omega) \to B(H)$ is a unital *-homomorphism. Then, there is a unique spectral measure $E$ relative to $(\Omega, H)$ so that</p>
+<center> $$ \varphi(f) = \int f dE $$ </center>
+<p>Moreover, if $u \in B(H)$, then $u$ commutes with $\varphi(f)$ for all $f \in C(\Omega)$ <em>iff</em> $u$ commutes with $E(S)$ for all Borel sets $S \subset \Omega$.</p>
+
+<p><strong>Proof.</strong> The proof that follows is fairly long. This is not because it is complicated, but because there is a lot of small things to prove. For better readability I am going to label the different parts. 1</p>
+
+<p>1. Consider the map $\tau_{x,y}: C(\Omega) \to \mathbb{C}$ given by $\tau_{x,y}(f) = \langle \varphi(f)(x), y \rangle$. This is clearly a linear map and $\tau_{x,y}(f) \leq \| x \| \| y \| \| f \|$, so bounded. By the Riesz-Kakutani theorem, there is a unique measure $\mu_{x,y}$ such that $\tau_{x,y}(f) = \int f d \mu_{x,y}$.<br />
+For fixed $f \in C(\Omega)$ note that the mapping</p>
+<center> $$ H^2 \to \mathbb{C}, \quad (x,y) \mapsto \langle \varphi(f)(x), y \rangle $$ </center>
+<p>is sesquilinear, thus, the maps $x \to \mu_{x,y}$ and $y \to \mu_{x,y}$ are linear-, and sesquilinear, respectively, thus the each $f \in B_\infty(\Omega)$ the mapping</p>
+<center> $$ H^2 \to \mathbb{C}, \quad (x,y) \mapsto \int f d \mu_{x,y} $$ </center>
+<p>is a sesquilinear form. It is also bounded with norm at most $\| f \|$. By Lemma 3 there is a unique $\psi \in B(H)$ such that $\langle \psi(f)(x), y \rangle = \int f d \mu_{x,y}$, and $\| \psi(f) \| \leq \| f \|$.<br />
+2. Suppose that $f \in C(\Omega)$. Then, we have that</p>
+<center> *they agree* </center>
+<p>From this we see that $\psi: B_\infty(\Omega) \to B(H)$ extends the map $\varphi: C(\Omega) \to B(H)$. At this point one should prove that $\psi$ is a *-homomorphism. Since this is somewhat lengthy, and does not contribute to the understanding of this proof, we leave it for a separate lemma later, and assume for now that $\psi$ is a *-homomorphism.<br />
+3. We now construct a spectral measure $E$ out of $\psi$. If $S$ is a Borel, set $E(S) = \psi(\chi_S)$. Since $\psi$ is a *-homomorphism, clearly $E(S)$ is a projection, and if $S’ \subset \Omega$ is another Borel set,</p>
+<center> $$ E(S \cap S') = \psi(\chi_{S \cap S'}) = \psi( \chi_S \chi_{S'}) = \psi(\chi_S) \psi(\chi_{S'}) = E(S)E(S') $$ </center>
+<p>Further, $E_{x,y}(S) = \langle E(S) x, y \rangle = \langle \psi(\chi_S) x, y \rangle = \int \chi_S d \mu_{x,y} = \mu_{x,y}(\chi_S)$, i.e. $E_{x,y} = \mu_{x,y}$. We conclude that $E(S)$ is in fact a spectral measure.<br />
+4. As one would hope, this spectral measure ‘encapsulates’ $\psi$: if $f \in B_\infty(\Omega)$,</p>
+<center> $$ \langle \left( \int f dE \right) (x), y \rangle = \int f d E_{x,y} = \int f d \mu_{x,y} = \langle \psi(f)(x), y \rangle \quad \forall x,y \in H $$ </center>
+<p>thus by the polarization identity $\int f dE = \psi(f)$, and in particular $\int f dE = \varphi(f)$ for every $f \in C(\Omega)$.<br />
+5. If $E’$ was another spectral measure with the same properties, then $E_{x,y} = E’_{x,y}$ must hold $\forall x, y \in H$, from which one can deduce that $E(S) = E’(S)$ for every Borel set $S \subset \Omega$, hence $E$ is unique.<br />
+6. Now suppose that $u \in B(H)$ commutes with all elements of the range of $\varphi$. Then, given $f \in C(\Omega)$, we have that</p>
+<center>$$\int f d E_{u(x),y} = \langle \psi(f)u(x), y \rangle = \langle u\psi(f)(x), y \rangle = \langle \psi(f)(x), u^*(y) = \int f dE_{x, u^*(y)}$$</center>
+<p>Thus in fact $E_{u(x), y} = E_{x,u^*(y)}$, since $C(\Omega)$ is dense in $B_\infty(\Omega)$. From this,</p>
+<center>$$\langle E(S) u(x), y \rangle = \langle E(S)x, u^*(y) \rangle \ \therefore \ \langle E(S) u(x), y \rangle = \langle uE(S)x, y \rangle \quad \forall x, y \in H$$</center>
+<p>thus $uE(S) = E(S)u$.<br />
+For the other implication, suppose that $uE(S) = E(S) u$ for every Borel measurable set $S \subseteq \Omega$. Upon an argument very similar to the line above, one can conclude that $E_{u(x), y} = E_{x, u^*(y)}$, which in a similar fashion to above, implies that $\psi(f) u = u \psi(f)$ for every $f \in C(\Omega)$. $\blacksquare$</p>
+
+<p><strong>Lemma.</strong> In the preceding proof the map $\psi: B_\infty(\Omega) \to B(H)$ is a *-homomorphism.</p>
+
+<p><strong>Proof.</strong> <em>Coming soon</em> $\blacksquare$</p>
+
+<p>Now we are for the Borel functional calculus:</p>
+
+<p><strong>Theorem 6.</strong> Let $u$ be a normal operator on a Hilbert space $H$. Then there is a unique spectral measure $E$ relative to $(\sigma(u), H)$, such that $u = \int z dE$, where $E$ is the inclusion map $z: \sigma(u) \to \mathbb{C}$.</p>
+
+<p><strong>Proof.</strong> Let $\varphi: C(\sigma(u)) \to B(H)$ be the functional calculus at $u$ (see Part 1. of the Functional calculus series). By Theorem 5. there is a unique spectral measure $E$ so that $\int f dE = \varphi(f)$ for every $f \in C(\Omega)$. In particular $\int z dE = \varphi(z) = u$, by the properties of the functional calculus. Uniqueness is easy to check. $\blacksquare$</p>
+
+<p>It seems like a bit of a scam, to work through all these technicalities, only to obtain such a slight generalization: we merely found a spectral measure, that extends the functional calculus to $B_\infty(\Omega)$. This, however, is much more powerful than the functional calculus. One can take indicator functions of certain subsets of $\Omega$, and obtain projections corresponding to the by integrating them with respect to $E$. In the functional calculus this is not trivial: nothing guarantees that indicators would  be continuous, and the topology of $\sigma(u)$ is also not particularly pleasant for the purposes of constructing continuous functions by hand in general.</p>
+
+<p>To end, we nail down some commonly used terminology. The spectral measure obtained in Theorem 6. is called the <em>resolution of identity</em> for $u$. Since $\int f dE = f(u)$ for every $f \in C(\Omega)$ (i.e. the result of applying the functional calculus), we can unambiguously define $f(u) = \int f dE$ for every $f \in B_\infty(\Omega)$. The unital *-homomorphism we obtain this way is called the <em>Borel functional calculus</em> at $u$.</p>]]></content><author><name>Gergo Stomfai</name><email>stomfaig@gmail.com</email></author><category term="projects" /><category term="oa-calc" /><summary type="html"><![CDATA[In this series, I intend to summarize how different functional calculi are consructed, and aim to provide some motivations why they are useful. In this article, I am going to go through the theory of spectral measures and the arising Borel functional calculus on C*-algebras.]]></summary></entry><entry><title type="html">A brief summary of Compact and finite rank operators</title><link href="http://localhost:4000/misc/2024/06/26/low-rank-operators.html" rel="alternate" type="text/html" title="A brief summary of Compact and finite rank operators" /><published>2024-06-26T00:00:00+01:00</published><updated>2024-06-26T00:00:00+01:00</updated><id>http://localhost:4000/misc/2024/06/26/low-rank-operators</id><content type="html" xml:base="http://localhost:4000/misc/2024/06/26/low-rank-operators.html"><![CDATA[<p><em>Disclaimer: My notes heavily influenced by ‘An introduction to the theory of C*-algebras’ by G. J. Murphy, and many proofs and developments are the exact ones in the book. These documents are intended to help for those reading the book, by providing more detail in some cases, or by organizing the material in a different way.</em></p>
 
 <p><em>This article is not complete yet</em></p>
 
@@ -275,7 +383,8 @@ From see that any property that can be proven for arbitrary positive functions, 
 <p>When working in Banach algebras, it is often convenient, to</p>
 
 <h2 id="holomorphic-functional-calculus">Holomorphic functional calculus.</h2>
-<p>Let $A$ be a Banach algebra, and let $a \in A$. Further, let $f: \mathbb{C} \to \mathbb{C}$ be a holomorphic function.</p>
+
+<p><em>to be started…</em></p>
 
 <h2 id="gelfand-representations">Gelfand representations.</h2>
 
