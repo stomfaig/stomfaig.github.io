@@ -39,7 +39,7 @@ And to my surprise this is the solution that one most often bumps into on the in
 
 In this article we will develop a circuit that truly implements the positive edge detection feature.
 
-## asd
+## Some details
 
 Upon working on this challenge a natural first thought is to realize that one needs some sort of memory, to be able to distinguish, whether there is a rising edge. When learning to code in Verilog, one encounters the D flip-flop relatively early on, which is usually coded in the exact way as in the original example:
 
