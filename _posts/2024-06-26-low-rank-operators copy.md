@@ -3,6 +3,7 @@ layout: post
 title: "Some interesting results about finite rank- and compact operators"
 mathjax: true
 categories: misc
+published: false
 ---
 
 *Disclaimer: My notes heavily influenced by 'An introduction to the theory of C\*-algebras' by G. J. Murphy, and many proofs and developments are the exact ones in the book. These documents are intended to help for those reading the book, by providing more detail in some cases, or by organizing the material in a different way.*

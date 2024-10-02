@@ -3,6 +3,7 @@ layout: post
 title: "Characters, states and Gelfand-Naimark"
 mathjax: true
 categories: misc
+published: false
 ---
 
 In this article I aim to introduce two ways to represent C\*-algebras.

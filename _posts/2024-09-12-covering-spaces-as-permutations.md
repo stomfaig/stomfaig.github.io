@@ -3,6 +3,7 @@ layout: post
 title: "Covering spaces and permutations."
 mathjax: true
 categories: misc
+published: false
 ---
 
 

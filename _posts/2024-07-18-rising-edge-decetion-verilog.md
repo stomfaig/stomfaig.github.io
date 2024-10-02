@@ -3,6 +3,7 @@ layout: post
 title: "Detecting rising edges in Verilog"
 mathjax: true
 categories: misc
+published: false
 ---
 
 Recently I have been playing around with the Verilog hardware description language, and came across the following exercise.
