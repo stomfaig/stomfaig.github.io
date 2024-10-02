@@ -3,6 +3,7 @@ title: "Operator Algebras - Calculi series"
 categories: oa-calc
 mathjax: true
 layout: project
+published: false
 ---
 
 It is easy enough to consider the sine, cosine or exponential of a real number. But can we do the same to a matrix? When does is make sense? These articles are intended to give some sort of an answer to such questions.  
