@@ -97,7 +97,7 @@ Given a positive linear function $\tau$ on $A$, we construct an associated repre
 
 **Lemma.** Given a positive linear functional $\tau$, $N\_\tau$ is a closed left-ideal.
 
-**Proof.** *Coming soon.* $\blacksquare$
+**Proof.** *Easy exercise.* $\blacksquare$
 
 The map
 <center> $$(A/N_\tau)^2 \to \mathbb{C}, \quad (a+ N_\tau, b + N_\tau) \to \tau(b^*a)$$ </center>
