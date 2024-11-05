@@ -64,14 +64,14 @@ If $\tilde{f_1}(y) = \tilde{f_2}(y)$, then similarly the two functions are local
 
 **Proposition 5.** Suppose that $X$ is a path-connected, locally path-connected and semilocally simply connected. Then $X$ has a simply-connected covering space.
 
-**Proof.** Let $x_0 \in X$ be a base-point, and consider
-$$\tilde{X} = \{ \[y\] : \text{$\gamma$ is a path in $X$ starting at $x_0$} \}$$
+**Proof.** Let $x_0 \in X$ be a base-point, and consider  
+<center>$$\tilde{X} = \{ [y] : \text{$\gamma$ is a path in $X$ starting at $x_0$} \}$$</center>
 The map $p: \tilde{X} \to X$ given by $\[\gamma\] \mapsto \gamma(1)$ is well-defined. Since $X$ is path connected, $p$ is clearly surjective.  
-Let $\mathcal{U}$ be the collection of path-connected open sets $U \subset X$ so the homomorphism of fundamental groups is induced by the inclusion map is trivial. We claim that $\mathcal{U}$ is a basis for the topology of $X$, which we prove in a lemma after the main proof. Given $U \in \mathcal{U}$, set
-$$U_{\[\gamma\]} = \{ \[\gamma \cdot \eta\] : \text{$\eta$ is a path in $U$ with $\nu(0) = \gamma(1)$}\} $$
+Let $\mathcal{U}$ be the collection of path-connected open sets $U \subset X$ so the homomorphism of fundamental groups is induced by the inclusion map is trivial. We claim that $\mathcal{U}$ is a basis for the topology of $X$, which we prove in a lemma after the main proof. Given $U \in \mathcal{U}$, set  
+<center>$$U_{[\gamma]} = \{ [\gamma \cdot \eta] : \text{$\eta$ is a path in $U$ with $\nu(0) = \gamma(1)$}\} $$</center>
 Since each $U \in \mathcal{U}$ is path connected, $p: U_{\[\gamma\]} \to U$ is surjective. Furthermore, $p$ is also injective, since any two paths connecting $\gamma(1)$ to $y \in U$ are homotopic.  
-Note also that, $U_{\[\gamma\]} = U_{\[\gamma'\]}$ if $\[\gamma'] \in U_{\[\gamma]}$, which implies that the sets $U_{\[\gamma]}$ form a topology on $\tilde{X}$. Indeed, given $U_{\[\gamma]}, V_{\[\gamma']}$, and $\[\gamma''] \in U_{\[\gamma]} \cap V_{\[\gamma']}$, we have that $U_{\[\gamma]} = U_{\[\gamma'']}$ and $V_{\[\gamma']} = V_{\[\gamma'']}$. In turn, for any $W \subset U \cap V$, with $\gamma''(1) \in W$, we have that
-$$W_{\[\gamma'']} \subset U_{\[\gamma'']} \cap V_{\[\gamma'']}$$
+Note also that, $U_{\[\gamma\]} = U_{\[\gamma'\]}$ if $\[\gamma'] \in U_{\[\gamma]}$, which implies that the sets $U_{\[\gamma]}$ form a topology on $\tilde{X}$. Indeed, given $U_{\[\gamma]}, V_{\[\gamma']}$, and $\[\gamma''] \in U_{\[\gamma]} \cap V_{\[\gamma']}$, we have that $U_{\[\gamma]} = U_{\[\gamma'']}$ and $V_{\[\gamma']} = V_{\[\gamma'']}$. In turn, for any $W \subset U \cap V$, with $\gamma''(1) \in W$, we have that  
+<center>$$W_{[\gamma'']} \subset U_{\[\gamma'']} \cap V_{[\gamma'']}$$</center>
 and also $\[\gamma''] \in W_{\[\gamma'']}$. \[Note here that if $U_{\[\gamma]} \cap V_{\[\gamma']} \neq \emptyset$ then also $U \cap V \neq \emptyset$, and also $\gamma''(1) \in U \cap V$]. This means that the sets $U_{\[\gamma]}$ form a topology on $\tilde{X}$.  
 Note that the bijection $U_{\[\gamma]} \to U$ is a homeomorphism, since it gives a bijection between the subsets $V_{\[\gamma']} \subset U_{\[\gamma]}$ and sets $V \in \mathcal{U}$ contained in $U$. This also implies that $p$ is continuous. $\blacksquare$
 
@@ -97,10 +97,10 @@ Note that the inverse of an isomorphism is also an isomorphism, and the composit
 **Proposition 7.** If $X$ is path connected and locally path connected, then two path connected covering spaces $p_1: \tilde{X_1} \to X$ and $p_2: \tilde{X_2} \to X$ are isomorphic *iff* 
 $$p_{1*}\left( \pi_1(\tilde{X_1}, \tilde{x_1}) \right) = p_{2*}\left( \pi_1(\tilde{X_2}, \tilde{x_2}) \right)$$
 
-**Proof.** If there is an isomorphism $f: (\tilde{X_1}, \tilde{x_1}) \to (\tilde{X_2}, \tilde{x_2})$, then from $p_1 = p_2 f$ we have $p_{1*} = p_{2*} f_{*}$
-$$p_{1*}\left( \pi_1(\tilde{X_1}, \tilde{x_1}) \right) \subseteq p_{2*}\left( \pi_1(\tilde{X_2}, \tilde{x_2}) \right)$$
+**Proof.** If there is an isomorphism $f: (\tilde{X_1}, \tilde{x_1}) \to (\tilde{X_2}, \tilde{x_2})$, then from $p_1 = p_2 f$ we have $p_{1\*} = p_{2\*} f_{\*}$
+$$p_{1\*}\left( \pi_1(\tilde{X_1}, \tilde{x_1}) \right) \subseteq p_{2\*}\left( \pi_1(\tilde{X_2}, \tilde{x_2}) \right)$$
 Since $f^{-1}$ is also an isomorphism, the reverse inclusion also holds, implying one direction of the proposition.  
-For the converse, suppose that $p_{1*}\left( \pi_1(\tilde{X_1}, \tilde{x_1}) \right) = p_{2*}\left( \pi_1(\tilde{X_2}, \tilde{x_2}) \right)$. By Proposition 3, $p_1$ has a lift $\tilde{p_1}: (\tilde{X_1}, \tilde{x_1}) \to (\tilde{X_2}, \tilde{x_2})$ so that $p_2 \ \tilde{p_1} = p_1$, and by applying the same reasoning to $p_2$ we obtain $\tilde{p_2}$ so that $p_1 \tilde{p_2} = p_2$. Since $\tilde{p_1}(\tilde{x_1}) = \tilde{x_2}$, and $\tilde{p_2}(\tilde{x_2}) = \tilde{x_1}$, we have that $\tilde{p_1}\tilde{p_2} = \mathbf{1}$ by Proposition 4 (by considering the lift of $\tilde{p_1} p_2$). $\blacksquare$
+For the converse, suppose that $p_{1\*}\left( \pi_1(\tilde{X_1}, \tilde{x_1}) \right) = p_{2*}\left( \pi_1(\tilde{X_2}, \tilde{x_2}) \right)$. By Proposition 3, $p_1$ has a lift $\tilde{p_1}: (\tilde{X_1}, \tilde{x_1}) \to (\tilde{X_2}, \tilde{x_2})$ so that $p_2 \ \tilde{p_1} = p_1$, and by applying the same reasoning to $p_2$ we obtain $\tilde{p_2}$ so that $p_1 \tilde{p_2} = p_2$. Since $\tilde{p_1}(\tilde{x_1}) = \tilde{x_2}$, and $\tilde{p_2}(\tilde{x_2}) = \tilde{x_1}$, we have that $\tilde{p_1}\tilde{p_2} = \mathbf{1}$ by Proposition 4 (by considering the lift of $\tilde{p_1} p_2$). $\blacksquare$
 
 All our results culminate in the following classification theorem:
 
