@@ -34,7 +34,7 @@ Recall that given a map $f: (Y, y_0) \to (X, x_0)$, by $f_*$ we denote the homo
 
 **Remark.** First this can seem a bit unintuitive. After all, if $\tilde{X}$ is like $X$ but with more sheets, should it not be the case that one loop can have multiple images? Note however that $\tilde{x_0}$ is fixed. Then, since lifts are unique, injectivity follows immediately.
 
-**Proof.** Conisder $\tilde{f}: I \to \tilde{X}$, a loop in $\tilde{X}$ starting at $\tilde{x_0}$, so that $[\tilde{f}] \in \ker p_*$. Then, there is a homotopy $f_t: I \to X$ so taking $f = p \tilde{f}$ to the constant trivial loop $f_1$. By Proposition 1, $f_t$ can be lifted to the starting point $\tilde{f}$ in a unique way. Note also, that since $f_1$ is constant, $\tilde{f_1}$ is a constant loop at $\tilde{x_0}$, implying that $[\tilde{f}] = 0$ in $\pi_1(\tilde{X}, \tilde{x_0})$. This proves injectivity.  
+**Proof.** Conisder $\tilde{f}: I \to \tilde{X}$, a loop in $\tilde{X}$ starting at $\tilde{x_0}$, so that $\[\tilde{f}\] \in \ker p\_\*$. Then, there is a homotopy $f\_t: I \to X$ so taking $f = p \tilde{f}$ to the constant trivial loop $f_1$. By Proposition 1, $f\_t$ can be lifted to the starting point $\tilde{f}$ in a unique way. Note also, that since $f_1$ is constant, $\tilde{f\_1}$ is a constant loop at $\tilde{x\_0}$, implying that $\[\tilde{f}\] = 0$ in $\pi_1(\tilde{X}, \tilde{x_0})$. This proves injectivity.  
 One implication in the second part is clear. Now suppose that $[f] \in p_*(\pi_1(X, x_0))$. Then $f$ is homotopic to a curve which is the image $p_*$. Any such curve has a unique lift to its pre-image, which thus concludes the proof. $\blacksquare$
 
 It is often useful to lift maps that are not homotopies:
