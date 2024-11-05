@@ -8,4 +8,4 @@
 layout: home
 ---
 
-Welcome to my site. Currently this blog is undergoing some well needed revision, so the posts have been removed. Check back in a few weeks!
+Welcome to my site. Currently this blog is undergoing some well needed revision, so the posts have been removed (apart from  the ones below!). Check back in a few weeks!
