@@ -3,7 +3,6 @@ layout: post
 title: "Covering spaces"
 mathjax: true
 categories: misc
-published: false
 ---
 
 
