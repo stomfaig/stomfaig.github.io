@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>concepts</title>
+  <meta name="author" content="Gergo Stomfai" />
+  <meta name="dcterms.date" content="2025-05-02" />
+  <title>My Document Title</title>
   <style>
     html {
+      font-size: 12pt;
       color: #1a1a1a;
       background-color: #fdfdfd;
     }
@@ -171,6 +174,11 @@
   type="text/javascript"></script>
 </head>
 <body>
+<header id="title-block-header">
+<h1 class="title">My Document Title</h1>
+<p class="author">Gergo Stomfai</p>
+<p class="date">2025-05-02</p>
+</header>
 <nav id="TOC" role="doc-toc">
 <ul>
 <li><a href="#short-intro-to-rl" id="toc-short-intro-to-rl">Short intro
@@ -185,16 +193,18 @@ id="toc-a-few-useful-quantities">A few useful quantities</a></li>
 <li><a href="#policy-optimization-methods."
 id="toc-policy-optimization-methods.">Policy optimization methods.</a>
 <ul>
-<li><a href="#approximate-value-function-methods."
-id="toc-approximate-value-function-methods.">Approximate Value function
-methods.</a></li>
-<li><a href="#simplest-policy-gradient"
-id="toc-simplest-policy-gradient">Simplest policy gradient</a></li>
+<li><a href="#exact-policy-iteration."
+id="toc-exact-policy-iteration.">Exact policy iteration.</a></li>
+<li><a href="#approximate-value-functions-methods."
+id="toc-approximate-value-functions-methods.">Approximate value
+functions methods.</a>
+<ul>
 <li><a href="#mixture-policies." id="toc-mixture-policies.">Mixture
 policies.</a></li>
 <li><a href="#beyond-mixture-policies---trpo"
 id="toc-beyond-mixture-policies---trpo">Beyond mixture policies -
 TRPO</a></li>
+</ul></li>
 </ul></li>
 <li><a href="#references" id="toc-references">References</a></li>
 </ul>
@@ -289,8 +299,7 @@ quantity that it is trying to increase.<br />
 <li>We want to be able to investigate the asymptotic behavior of the
 method.</li>
 </ol>
-<h2 id="approximate-value-function-methods.">Approximate Value function
-methods.</h2>
+<h2 id="exact-policy-iteration.">Exact policy iteration.</h2>
 <p>The basic idea is the following. If we have access to the exact value
 function, given a policy <span class="math inline">\(\pi\)</span>, we
 can compute <span class="math inline">\(Q_\pi(s, a)\)</span> explicitly
@@ -298,90 +307,76 @@ for each <span class="math inline">\((s,a)\)</span> pair, and create a
 new deterministic policy <span class="math inline">\(\pi&#39;\)</span>,
 such that <span class="math display">\[\pi&#39;(a;s) = \text{$1$ iff $a
 = \arg \max_a Q_\pi(s,a)$, $0$ otherwise}\]</span></p>
-<p>Instead, we can use an approximation of the the value function to
-perform the same game. These methods are called <strong>Approximate
-Value Function Methods</strong>.</p>
-<h2 id="simplest-policy-gradient">Simplest policy gradient</h2>
-<p>To take the theory out for a spin, consider the following. Let <span
-class="math inline">\(\pi_\theta\)</span> be a parametric family of
-policies. Suppose that the initial state of the universe is determined
-by some initial distribution <span
-class="math inline">\(\rho_0\)</span>. We start by thinking about the
-distribution <span class="math inline">\(P(\tau | \pi_\theta)\)</span>,
-and especially about <span class="math inline">\(\nabla P(\tau |
-\pi_\theta)\)</span>. Intuitively, we have the following:</p>
+<h2 id="approximate-value-functions-methods.">Approximate value
+functions methods.</h2>
+<p>One major drawback of Exact Policy Iteration is the fact that it is
+only guaranteed to improve the performance of the policy, if the new
+policy has non-negative advantage in every state. This is very hard to
+guarantee in practice. Thus, instead of trying to optimize <span
+class="math inline">\(\eta(\pi)\)</span> directly, we are going to
+define a <em>surrogate</em> objective function. To do this let us fix
+some notation first.</p>
+<p>Suppose that we have a fixed initial distribution, say <span
+class="math inline">\(\mu\)</span>. We will implicitly assume that this
+exists, but won’t mention that it exists very often. Then, the
+<em>discounted visitation frequencies</em> are given by: <span
+class="math display">\[\rho_\pi(s) = P(s_0 = s) + \gamma P(s_1 = s) +
+\cdots\]</span> And the <em>policy advantage</em> <span
+class="math inline">\(\mathbb{A}_{\pi}(\pi&#39;)\)</span> of a policy
+<span class="math inline">\(\pi&#39;\)</span> over another policy <span
+class="math inline">\(\pi\)</span> as <span
+class="math display">\[\mathbb{A}_{\pi}(\pi&#39;) = E_{s \sim d_{\pi,
+\mu}} [E_{a \sim \pi&#39;(a;s)} [A_\pi(s, a)]]\]</span> We claim that
+the function <span class="math inline">\(L_\pi(\pi_\theta) = J(\pi) +
+\mathbb{A}_{\pi} (\pi_\theta)\)</span> (as a function of <span
+class="math inline">\(\theta\)</span>) matches <span
+class="math inline">\(J(\pi_\theta)\)</span> up to first order. One way
+to prove this, is to consider the expansion: <span
+class="math display">\[\begin{align*}
+    J(\pi_\theta) &amp;= J(\pi) + \sum_t \sum_s P(s_t = s | \pi_\theta)
+\sum_a \pi_\theta(a | s) \gamma^t A_\pi(s, a)\\
+    &amp;= \cdots\\
+    &amp;= J(\pi) + \sum_s \rho_{\pi_\theta}(s) \sum_a \pi_\theta(a|s)
+A_\pi(s,a)
+\end{align*}\]</span> And then take the derivative and compare it to the
+derivative of <span class="math inline">\(L\)</span>.</p>
+<p><strong>Exercise.</strong> Fill the gaps in the previous
+expansion.</p>
+<p><strong>Exercise.</strong> Using the outline above, or in any other
+way, prove that <span class="math inline">\(L_\pi(\pi_\theta)\)</span>
+agrees with <span class="math inline">\(J(\pi_\theta)\)</span> up to
+first order.</p>
+<p>There is a natural question to ask now.</p>
 <blockquote>
-<p>If you think about a trajectory, there are two “components”: the
-user, and the universe ones. If we perturb <span
-class="math inline">\(\theta\)</span>, the effect of this should be
-expressible in terms of derivatives of the policy only, since the
-actions of the universe do not depend on <span
-class="math inline">\(\theta\)</span>.</p>
+<p>We could simply optimize <span class="math inline">\(J\)</span> by
+substituting it with <span class="math inline">\(L\)</span>, and using
+some sort of gradient based method. But how long should our step size
+be? Is there any way to use the fact that <span
+class="math inline">\(L\)</span> and <span
+class="math inline">\(J\)</span> are not just arbitrary functions, but
+have a fair amount of structure due to the fact that they arise as RL
+reward functions?</p>
 </blockquote>
-<p>Let us turn this into mathematics now. Note that <span
-class="math display">\[\nabla_\theta P(\tau | \pi_\theta) = P(\tau |
-\pi_\theta) \left( \nabla_\theta \log P(\tau | \pi_{\theta}) \right)
-\]</span> The probability of a trajectory <span
-class="math inline">\(\tau = (s_0, a_0, \ldots)\)</span> given an
-initial distribution <span class="math inline">\(\theta\)</span> is
-given by: <span class="math display">\[P(\tau | \theta) = \rho(s_0)
-\prod_i P(s_{i+1} ; s_i, a_i) \pi_{\theta}(a_i | s_i)\]</span> This way
-<span class="math display">\[\log P(\tau | \theta) = \log \rho (s_0) +
-\sum_i \log P(s_{i+1}; s_i, a_i) + \pi_{\theta}(a_i|s_i)\]</span> So if
-now we take the derivative of this with respect to <span
-class="math inline">\(\theta\)</span>, all the <span
-class="math inline">\(P(s_{i+1}; s_i, a_i)\)</span> terms will vanish,
-since they are not dependent on the parameter <span
-class="math inline">\(\theta\)</span>.</p>
-<h2 id="mixture-policies.">Mixture policies.</h2>
+<h3 id="mixture-policies.">Mixture policies.</h3>
 <p><em>The idea of this section was originally published in <a
 href="https://dl.acm.org/doi/10.5555/645531.656005">here</a></em>.</p>
-<p>The main idea here is that instead of simply thinking about <span
-class="math inline">\(\eta_\rho(\pi)\)</span>, we investigate the
-expression <span class="math display">\[\eta_\mu(\pi) = E_{s \sim \mu}
-[V_\pi(s)]\]</span> for any <em>restart distribution</em> <span
-class="math inline">\(\mu\)</span>. While it is clear, that a policy
-that is optimal for <span class="math inline">\(\rho\)</span> is also
-optimal for any other restart distribution (why?), this statement
-becomes false, if we restrict to a subset of policies (e.g. the codomain
-of some parametric family of distributions).</p>
-<p>We saw before a naive way of updating policies. by simply replacing a
-policy with another one, hopefully constructed in such a way that it
-performs better in every situation. Instead, we can combine two policies
-in a more subtle way: <span
+<p>Let’s try to apply the previous idea in the simples setting,
+i.e. along a line. <span
 class="math display">\[\pi_{\text{new}}^{\alpha}(a;s) = (1 - \alpha)
 \pi(a;s) + \alpha \pi&#39;(a; s)\]</span> Where <span
-class="math inline">\(0 \leq \alpha \leq 1\)</span>. Our hope is that if
-the policy <span class="math inline">\(\pi&#39;\)</span> is
-<em>sometimes better</em> than <span class="math inline">\(\pi\)</span>,
-then there is an <span class="math inline">\(\alpha\)</span> such that
-the resulting <span class="math inline">\(\pi_{\text{new}}\)</span> is a
-better strategy that <span class="math inline">\(\pi\)</span>.</p>
-<p>To understand this idea more deeply, we define the <strong>policy
-advantage</strong> <span class="math inline">\(\mathbb{A}_{\pi,
-\mu}(\pi&#39;)\)</span> of a policy <span
-class="math inline">\(\pi&#39;\)</span> over another policy <span
-class="math inline">\(\pi\)</span> as <span
-class="math display">\[\mathbb{A}_{\pi, \mu}(\pi&#39;) = E_{s \sim
-d_{\pi, \mu}} [E_{a \sim \pi&#39;(a;s)} [A_\pi(s, a)]]\]</span> This
-way, using the simple gradient result: <span
-class="math display">\[\frac{\partial \eta_\mu}{\partial \alpha}
-\bigg|_{\alpha = 0} = \frac{1}{1-\gamma} \mathbb{A}_{\pi,
-\mu}(\pi&#39;)\]</span> Thus a positive advantage implies the existence
-of a sufficiently small <span class="math inline">\(\alpha\)</span> such
-that the policy <span class="math inline">\(\pi_{\text{new}}\)</span> is
-better than <span class="math inline">\(\pi\)</span>. We summarize this
-in the following statement:</p>
-<p><strong>Theorem.</strong> Given a policies <span
-class="math inline">\(\pi\)</span> and <span
-class="math inline">\(\pi&#39;\)</span> and a starting distribution
-<span class="math inline">\(\mu\)</span>, there is <span
-class="math inline">\(0 &lt; \alpha \leq 1\)</span> such that the policy
-<span class="math inline">\(\pi_{\text{new}}^\alpha\)</span> is better
-than <span class="math inline">\(\pi\)</span> with the starting
-distribution <span class="math inline">\(\mu\)</span> <em>iff</em> <span
-class="math inline">\(\mathbb{A}_{\pi, \mu}(\pi&#39;) &gt;
-0\)</span>.</p>
+class="math inline">\(0 \leq \alpha \leq 1\)</span>. We have:</p>
+<p><span class="math display">\[\begin{align*}
+J(\pi_\text{new}^\alpha) &amp;= L_\pi(\pi&#39;) + O(\alpha^2)\\
+&amp;= J(\pi) + \mathbb{A}_{\pi}((1- \alpha) \pi + \alpha \pi&#39;) +
+O(\alpha^2)\\
+&amp;= J(\pi) + \alpha \mathbb{A}_{\pi}(\pi&#39;) + O(\alpha^2)
+\end{align*}\]</span> That is: <span
+class="math display">\[\frac{\partial J}{\partial \alpha} \bigg|_{\alpha
+= 0} = \frac{1}{1-\gamma} \mathbb{A}_{\pi, \mu}(\pi&#39;)\]</span> Thus
+a positive advantage implies the existence of a sufficiently small <span
+class="math inline">\(\alpha\)</span> such that the policy <span
+class="math inline">\(\pi_{\text{new}}\)</span> is better than <span
+class="math inline">\(\pi\)</span>.</p>
 <p><strong>Theorem.</strong> Let <span
 class="math inline">\(\mathbb{A}\)</span> be the policy advantage of
 <span class="math inline">\(\pi&#39;\)</span> with respect to <span
@@ -393,8 +388,8 @@ class="math inline">\(\alpha \in [0,1]\)</span>: <span
 class="math display">\[\eta_\mu(\pi_{new}) - \eta_{\mu}(\pi) \geq
 \frac{\alpha}{1 - \gamma} \left( \mathbb{A} - \frac{2 \alpha \gamma
 \varepsilon}{1- \gamma(1 - \alpha)} \right)\]</span></p>
-<h2 id="beyond-mixture-policies---trpo">Beyond mixture policies -
-TRPO</h2>
+<h3 id="beyond-mixture-policies---trpo">Beyond mixture policies -
+TRPO</h3>
 <p><em>The idea of this section was originally published in <a
 href="https://arxiv.org/abs/1502.05477">here</a></em>.</p>
 <p>Fundamentally, we are motivated by the following thought, that
@@ -423,7 +418,33 @@ corresponding theorem for Mixture policies:</p>
 D_{TV}^{\text{max}}(\pi_{\text{old}}, \pi_{\text{new}})\)</span>. Then:
 <span class="math display">\[\eta(\pi_{\text{new}}) \geq
 L_{\pi_{\text{old}}}(\pi_{\text{new}}) - \frac{4 \varepsilon \gamma}{(1
-- \gamma)^2}\]</span></p>
+- \gamma)^2} \alpha^2\]</span></p>
+<p>Now, in practice computing the total variation divergence is not
+always feasible. It turns out though that it relates to the
+KL-divergence in a very useful way: <span
+class="math display">\[D_{\text{TV}}(p || q)^2 \leq D_{\text{KL}}(p
+|| q)\]</span> And we set <span
+class="math display">\[D_{\text{KL}}^{\text{max}} (\pi, \tilde{\pi}) =
+\max_s D_{\text{KL}}(\pi(\cdot | s) || \tilde{\pi}(\cdot | s))\]</span>
+Which yields the following form of the above theorem: <span
+class="math display">\[\eta(\tilde{\pi}) \geq L_{\pi}(\tilde{\pi}) -
+\frac{4 \varepsilon \gamma}{(1 - \gamma)^2} D_{\text{KL}}^{\text{max}}(
+\pi, \tilde{\pi})\]</span></p>
+<p>An interesting remark to note here.</p>
+<blockquote>
+<p>We could consider the policy optimization iteration given by the
+pseudocode:</p>
+<pre><code>while (not converged):  
+  pi_new = argmax_pi L_{pi_i}(pi) - CD_KL_max (pi_old, pi)</code></pre>
+<p>Which can easily be shown to monotonically improve the policy in
+every iteration. The interesting thing is to note the similarity between
+this method and <a href="proximal_methods">proximal methods</a> in
+optimization theory. It turns out, that if one simply optimizes this
+objective function with the constant <span
+class="math inline">\(C\)</span> as suggested above, the step sizes of
+the method end up being really small. Instead, one can consider a <a
+href="trust_region_type_methods">trust-region type method</a>:</p>
+</blockquote>
 <h1 id="references">References</h1>
 <p><a
 href="https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html#deriving-the-simplest-policy-gradient">OpenAI
