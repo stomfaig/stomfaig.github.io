@@ -193,8 +193,13 @@ id="toc-a-few-useful-quantities">A few useful quantities</a></li>
 <li><a href="#policy-optimization-methods."
 id="toc-policy-optimization-methods.">Policy optimization methods.</a>
 <ul>
+<li><a href="#some-warmup." id="toc-some-warmup.">Some warmup.</a>
+<ul>
 <li><a href="#exact-policy-iteration."
 id="toc-exact-policy-iteration.">Exact policy iteration.</a></li>
+<li><a href="#policy-gradient." id="toc-policy-gradient.">Policy
+gradient.</a></li>
+</ul></li>
 <li><a href="#approximate-value-functions-methods."
 id="toc-approximate-value-functions-methods.">Approximate value
 functions methods.</a>
@@ -204,6 +209,17 @@ policies.</a></li>
 <li><a href="#beyond-mixture-policies---trpo"
 id="toc-beyond-mixture-policies---trpo">Beyond mixture policies -
 TRPO</a></li>
+<li><a href="#almost-trpo-ppo" id="toc-almost-trpo-ppo">Almost TRPO:
+PPO</a></li>
+</ul></li>
+<li><a href="#implementations-and-their-consequences."
+id="toc-implementations-and-their-consequences.">Implementations and
+their consequences.</a>
+<ul>
+<li><a href="#generalized-advantage-estimation."
+id="toc-generalized-advantage-estimation.">Generalized advantage
+estimation.</a></li>
+<li><a href="#grpo" id="toc-grpo">GRPO</a></li>
 </ul></li>
 </ul></li>
 <li><a href="#references" id="toc-references">References</a></li>
@@ -299,7 +315,8 @@ quantity that it is trying to increase.<br />
 <li>We want to be able to investigate the asymptotic behavior of the
 method.</li>
 </ol>
-<h2 id="exact-policy-iteration.">Exact policy iteration.</h2>
+<h2 id="some-warmup.">Some warmup.</h2>
+<h3 id="exact-policy-iteration.">Exact policy iteration.</h3>
 <p>The basic idea is the following. If we have access to the exact value
 function, given a policy <span class="math inline">\(\pi\)</span>, we
 can compute <span class="math inline">\(Q_\pi(s, a)\)</span> explicitly
@@ -307,6 +324,45 @@ for each <span class="math inline">\((s,a)\)</span> pair, and create a
 new deterministic policy <span class="math inline">\(\pi&#39;\)</span>,
 such that <span class="math display">\[\pi&#39;(a;s) = \text{$1$ iff $a
 = \arg \max_a Q_\pi(s,a)$, $0$ otherwise}\]</span></p>
+<h3 id="policy-gradient.">Policy gradient.</h3>
+<p>To take the theory out for a spin, consider the following. Let <span
+class="math inline">\(\pi_\theta\)</span> be a parametric family of
+policies. Suppose that the initial state of the universe is determined
+by some initial distribution <span
+class="math inline">\(\rho_0\)</span>. Then, our aim is to find the
+policy which would maximize the expression <span
+class="math display">\[J(\theta) = E_{\tau \sim \pi_\theta}
+[R(\tau)]\]</span> An intuitive way to do this would be to compute the
+gradient <span class="math inline">\(\nabla_\theta J(\theta)\)</span>,
+and perform some form of gradient optimization method.<br />
+Let us start by investigating how changing theta affects the evolution
+of the universe by thinking about <span
+class="math inline">\(\nabla_\theta P(\tau | \theta)\)</span>. By the
+<em>“log-derivative trick”</em>: <span
+class="math display">\[\nabla_\theta P(\tau | \pi_\theta) = P(\tau |
+\pi_\theta) \left( \nabla_\theta \log P(\tau | \pi_{\theta}) \right)
+\]</span> The probability of a trajectory <span
+class="math inline">\(\tau = (s_0, a_0, \ldots)\)</span> given an
+initial distribution <span class="math inline">\(\rho_0\)</span> is
+given by: <span class="math display">\[P(\tau | \theta) = \rho(s_0)
+\prod_i P(s_{i+1} ; s_i, a_i) \pi_{\theta}(a_i | s_i)\]</span> This way
+<span class="math display">\[\log P(\tau | \theta) = \log \rho (s_0) +
+\sum_i \log P(s_{i+1}; s_i, a_i) + \log \pi_{\theta}(a_i|s_i)\]</span>
+So if now we take the derivative of this with respect to <span
+class="math inline">\(\theta\)</span>, all the <span
+class="math inline">\(P(s_{i+1}; s_i, a_i)\)</span> terms will vanish,
+since they are not dependent on the parameter <span
+class="math inline">\(\theta\)</span>. Hence: <span
+class="math display">\[\nabla_\theta P(\tau | \theta) = P(\tau | \theta)
+\left( \sum_i \nabla_\theta \log \pi_{\theta}(a_i | s_i)
+\right)\]</span> So then, <span class="math display">\[\begin{align*}
+    \nabla_\theta J(\theta) &amp;= E_{\tau \sim \pi_\theta} [R(\tau)]\\
+    &amp;= \nabla_\theta \int_\tau P(\tau | \theta) R(\tau)\\
+    &amp;= \int_\tau P(\tau | \theta) \left( \sum_i \nabla_\theta \log
+\pi_{\theta}(a_i | s_i) \right) R(\tau)\\
+    &amp;= E_{\tau \sim \pi_\theta} [\left( \sum_i \nabla_\theta \log
+\pi_{\theta}(a_i | s_i) \right) R(\tau)]
+\end{align*}\]</span></p>
 <h2 id="approximate-value-functions-methods.">Approximate value
 functions methods.</h2>
 <p>One major drawback of Exact Policy Iteration is the fact that it is
@@ -346,7 +402,7 @@ expansion.</p>
 way, prove that <span class="math inline">\(L_\pi(\pi_\theta)\)</span>
 agrees with <span class="math inline">\(J(\pi_\theta)\)</span> up to
 first order.</p>
-<p>There is a natural question to ask now.</p>
+<p>There is a natural question to ask now:</p>
 <blockquote>
 <p>We could simply optimize <span class="math inline">\(J\)</span> by
 substituting it with <span class="math inline">\(L\)</span>, and using
@@ -444,7 +500,19 @@ objective function with the constant <span
 class="math inline">\(C\)</span> as suggested above, the step sizes of
 the method end up being really small. Instead, one can consider a <a
 href="trust_region_type_methods">trust-region type method</a>:</p>
+<pre><code>while (not converged):  
+  pi_new = argmax_pi L_{pi_i}(pi)
+      such that CD_KL_max (pi_old, pi) &lt;= delta</code></pre>
 </blockquote>
+<p>One final thing to note is that one rarely encounters TRPO in the
+form we have just described. The following form of the objective is
+used:</p>
+<h3 id="almost-trpo-ppo">Almost TRPO: PPO</h3>
+<h2 id="implementations-and-their-consequences.">Implementations and
+their consequences.</h2>
+<h3 id="generalized-advantage-estimation.">Generalized advantage
+estimation.</h3>
+<h3 id="grpo">GRPO</h3>
 <h1 id="references">References</h1>
 <p><a
 href="https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html#deriving-the-simplest-policy-gradient">OpenAI
