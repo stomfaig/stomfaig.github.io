@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>concepts</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <script
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#short-intro-to-rl" id="toc-short-intro-to-rl">Short intro
+to RL</a>
+<ul>
+<li><a href="#reward-and-return" id="toc-reward-and-return">Reward and
+Return</a></li>
+<li><a href="#the-goal" id="toc-the-goal">The Goal</a></li>
+<li><a href="#a-few-useful-quantities"
+id="toc-a-few-useful-quantities">A few useful quantities</a></li>
+</ul></li>
+<li><a href="#policy-optimization-methods."
+id="toc-policy-optimization-methods.">Policy optimization methods.</a>
+<ul>
+<li><a href="#approximate-value-function-methods."
+id="toc-approximate-value-function-methods.">Approximate Value function
+methods.</a></li>
+<li><a href="#simplest-policy-gradient"
+id="toc-simplest-policy-gradient">Simplest policy gradient</a></li>
+<li><a href="#mixture-policies." id="toc-mixture-policies.">Mixture
+policies.</a></li>
+<li><a href="#beyond-mixture-policies---trpo"
+id="toc-beyond-mixture-policies---trpo">Beyond mixture policies -
+TRPO</a></li>
+</ul></li>
+<li><a href="#references" id="toc-references">References</a></li>
+</ul>
+</nav>
+<p><em>A few preliminary remarks.</em> This page is intended to be a
+work, where I collect resources, derivations, ideas etc. that I found
+useful when diving into the world of RL. In particular, it is not a
+hand-held, explain everything type introduction, but rather one that a
+person with some mathematical affinity (not much) could understand. As
+such, not everything is discussed in detail.</p>
+<h1 id="short-intro-to-rl">Short intro to RL</h1>
+<p><em>This section is inspired by <a
+href="https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html#deriving-the-simplest-policy-gradient">1</a>.</em></p>
+<p><strong>Action space:</strong> The space of actions a model can take
+in a given situation.</p>
+<p>We can define <strong>policies</strong> given action spaces. A
+<strong>policy</strong> is simply a mapping (deterministic or not) from
+the current state of the system to a possible action. If a policy is
+deterministic, we have: <span class="math display">\[a_t =
+\mu(s_t)\]</span> And if it is stochastic: <span class="math display">\[
+a_t \sim \mu(\cdot | s_t)\]</span></p>
+<p><strong>Remark.</strong> We can think of deterministic policies as
+functions mapping from the state to the action. We can think of
+non-deterministic policies as classifiers.</p>
+<p>The <strong>trajectory</strong> of a system is simply the sequence of
+states and actions in the world</p>
+<p><span class="math display">\[\tau = (s_0, a_0, s_1,
+\ldots)\]</span></p>
+<p>The way the next state of the system is determined based on the
+current one is governed by the <strong>natural laws of the
+environment</strong>: <span class="math display">\[s_{t+1} = f(s_t,
+a_t)\]</span> Obviously <span class="math inline">\(f\)</span> can also
+be stochastic.</p>
+<h3 id="reward-and-return">Reward and Return</h3>
+<p>There are several way in which the reward for a given action is
+determined:</p>
+<p><span class="math display">\[r_t = R(s_t, a_t, s_{t+1})\]</span>
+<span class="math display">\[r_t = R(s_t, a_t)\]</span> <span
+class="math display">\[r_t = R(s_t)\]</span> The main difference here is
+that what actually determines the reward. In the first case, the current
+state, the action and the next state all matters. Maybe the next state
+doesn’t matter (2nd case). Or maybe the only thing that matters is the
+current state. One can easily come up with “real world” examples to all
+these.<br />
+There are also different ways in which we can define the return of
+trajectory: <span class="math display">\[R(\tau) = \sum_{t}^T
+r_t\]</span> <span class="math display">\[R(\tau) = \sum_{t} \gamma^t
+r_t\]</span> these are for the cases when the time horizon is finite, or
+infinite respectively.</p>
+<h3 id="the-goal">The Goal</h3>
+<p>We are now in position to state the goal of RL. Given a model of the
+universe, consider a policy <span class="math inline">\(\pi\)</span> and
+the distribution <span class="math inline">\(P(\tau|\pi)\)</span>, which
+determines how likely a certain trajectory is given the policy and the
+laws of the universe. Then, our aim is to solve the problem</p>
+<p><span class="math display">\[\pi^* = \arg \max_\pi E_{\tau \sim
+P(\cdot | \pi)} [T(\tau)]\]</span></p>
+<p>Where the solution <span class="math inline">\(\pi^*\)</span> is
+called the optimal policy.</p>
+<h3 id="a-few-useful-quantities">A few useful quantities</h3>
+<p>Here we list the definition of a few quantities, that are useful when
+comparing policies.</p>
+<p><span class="math display">\[\textbf{On-policy value function:} \quad
+V_\pi(s) = E_{\tau \sim \pi}[R(\tau) | s_0 = s]\]</span> <span
+class="math display">\[\textbf{On-policy action-value function:} \quad
+Q_\pi(s, a) = E_{\tau \sim \pi}[R(\tau) | s_0 = s, a_0 = a]\]</span>
+<span class="math display">\[\textbf{Optimal value function:} \quad
+V_*(s) = \sup_{\pi} E_{\tau \sim \pi}[R(\tau) | s_0 = s]\]</span> <span
+class="math display">\[\textbf{Optimal action-value function:} \quad
+Q_*(s, a) = \sup_{\pi} E_{\tau \sim \pi}[R(\tau) | s_0 = s, a_0 =
+a]\]</span></p>
+<p>One can “peel off” the first action in the “value type”- and the
+first state change of the world in the “action-value” type equations, to
+get a self-consistency condition between these quantities. These are
+called the <strong>Bellman equations</strong>.</p>
+<p>We can also define the <strong>advantage function</strong> of an
+action with respect to a policy <span
+class="math inline">\(\pi\)</span>: <span
+class="math display">\[A_\pi(s, a) = Q_\pi(s, a) - V_\pi(s)\]</span></p>
+<h1 id="policy-optimization-methods.">Policy optimization methods.</h1>
+<p>The methods we are going to encounter are all based on iteratively
+improving a policy that we currently have to a “better one”. To make the
+subject of the discussion more clear, we more explicitly clarify the
+objectives of the iterative processes we are to constrcuct:</p>
+<ol type="1">
+<li>We our method to increase some performance measure of the policy
+every step.<br />
+</li>
+<li>We want to be able to verify that our method is improving the
+quantity that it is trying to increase.<br />
+</li>
+<li>We want to be able to investigate the asymptotic behavior of the
+method.</li>
+</ol>
+<h2 id="approximate-value-function-methods.">Approximate Value function
+methods.</h2>
+<p>The basic idea is the following. If we have access to the exact value
+function, given a policy <span class="math inline">\(\pi\)</span>, we
+can compute <span class="math inline">\(Q_\pi(s, a)\)</span> explicitly
+for each <span class="math inline">\((s,a)\)</span> pair, and create a
+new deterministic policy <span class="math inline">\(\pi&#39;\)</span>,
+such that <span class="math display">\[\pi&#39;(a;s) = \text{$1$ iff $a
+= \arg \max_a Q_\pi(s,a)$, $0$ otherwise}\]</span></p>
+<p>Instead, we can use an approximation of the the value function to
+perform the same game. These methods are called <strong>Approximate
+Value Function Methods</strong>.</p>
+<h2 id="simplest-policy-gradient">Simplest policy gradient</h2>
+<p>To take the theory out for a spin, consider the following. Let <span
+class="math inline">\(\pi_\theta\)</span> be a parametric family of
+policies. Suppose that the initial state of the universe is determined
+by some initial distribution <span
+class="math inline">\(\rho_0\)</span>. We start by thinking about the
+distribution <span class="math inline">\(P(\tau | \pi_\theta)\)</span>,
+and especially about <span class="math inline">\(\nabla P(\tau |
+\pi_\theta)\)</span>. Intuitively, we have the following:</p>
+<blockquote>
+<p>If you think about a trajectory, there are two “components”: the
+user, and the universe ones. If we perturb <span
+class="math inline">\(\theta\)</span>, the effect of this should be
+expressible in terms of derivatives of the policy only, since the
+actions of the universe do not depend on <span
+class="math inline">\(\theta\)</span>.</p>
+</blockquote>
+<p>Let us turn this into mathematics now. Note that <span
+class="math display">\[\nabla_\theta P(\tau | \pi_\theta) = P(\tau |
+\pi_\theta) \left( \nabla_\theta \log P(\tau | \pi_{\theta}) \right)
+\]</span> The probability of a trajectory <span
+class="math inline">\(\tau = (s_0, a_0, \ldots)\)</span> given an
+initial distribution <span class="math inline">\(\theta\)</span> is
+given by: <span class="math display">\[P(\tau | \theta) = \rho(s_0)
+\prod_i P(s_{i+1} ; s_i, a_i) \pi_{\theta}(a_i | s_i)\]</span> This way
+<span class="math display">\[\log P(\tau | \theta) = \log \rho (s_0) +
+\sum_i \log P(s_{i+1}; s_i, a_i) + \pi_{\theta}(a_i|s_i)\]</span> So if
+now we take the derivative of this with respect to <span
+class="math inline">\(\theta\)</span>, all the <span
+class="math inline">\(P(s_{i+1}; s_i, a_i)\)</span> terms will vanish,
+since they are not dependent on the parameter <span
+class="math inline">\(\theta\)</span>.</p>
+<h2 id="mixture-policies.">Mixture policies.</h2>
+<p><em>The idea of this section was originally published in <a
+href="https://dl.acm.org/doi/10.5555/645531.656005">here</a></em>.</p>
+<p>The main idea here is that instead of simply thinking about <span
+class="math inline">\(\eta_\rho(\pi)\)</span>, we investigate the
+expression <span class="math display">\[\eta_\mu(\pi) = E_{s \sim \mu}
+[V_\pi(s)]\]</span> for any <em>restart distribution</em> <span
+class="math inline">\(\mu\)</span>. While it is clear, that a policy
+that is optimal for <span class="math inline">\(\rho\)</span> is also
+optimal for any other restart distribution (why?), this statement
+becomes false, if we restrict to a subset of policies (e.g. the codomain
+of some parametric family of distributions).</p>
+<p>We saw before a naive way of updating policies. by simply replacing a
+policy with another one, hopefully constructed in such a way that it
+performs better in every situation. Instead, we can combine two policies
+in a more subtle way: <span
+class="math display">\[\pi_{\text{new}}^{\alpha}(a;s) = (1 - \alpha)
+\pi(a;s) + \alpha \pi&#39;(a; s)\]</span> Where <span
+class="math inline">\(0 \leq \alpha \leq 1\)</span>. Our hope is that if
+the policy <span class="math inline">\(\pi&#39;\)</span> is
+<em>sometimes better</em> than <span class="math inline">\(\pi\)</span>,
+then there is an <span class="math inline">\(\alpha\)</span> such that
+the resulting <span class="math inline">\(\pi_{\text{new}}\)</span> is a
+better strategy that <span class="math inline">\(\pi\)</span>.</p>
+<p>To understand this idea more deeply, we define the <strong>policy
+advantage</strong> <span class="math inline">\(\mathbb{A}_{\pi,
+\mu}(\pi&#39;)\)</span> of a policy <span
+class="math inline">\(\pi&#39;\)</span> over another policy <span
+class="math inline">\(\pi\)</span> as <span
+class="math display">\[\mathbb{A}_{\pi, \mu}(\pi&#39;) = E_{s \sim
+d_{\pi, \mu}} [E_{a \sim \pi&#39;(a;s)} [A_\pi(s, a)]]\]</span> This
+way, using the simple gradient result: <span
+class="math display">\[\frac{\partial \eta_\mu}{\partial \alpha}
+\bigg|_{\alpha = 0} = \frac{1}{1-\gamma} \mathbb{A}_{\pi,
+\mu}(\pi&#39;)\]</span> Thus a positive advantage implies the existence
+of a sufficiently small <span class="math inline">\(\alpha\)</span> such
+that the policy <span class="math inline">\(\pi_{\text{new}}\)</span> is
+better than <span class="math inline">\(\pi\)</span>. We summarize this
+in the following statement:</p>
+<p><strong>Theorem.</strong> Given a policies <span
+class="math inline">\(\pi\)</span> and <span
+class="math inline">\(\pi&#39;\)</span> and a starting distribution
+<span class="math inline">\(\mu\)</span>, there is <span
+class="math inline">\(0 &lt; \alpha \leq 1\)</span> such that the policy
+<span class="math inline">\(\pi_{\text{new}}^\alpha\)</span> is better
+than <span class="math inline">\(\pi\)</span> with the starting
+distribution <span class="math inline">\(\mu\)</span> <em>iff</em> <span
+class="math inline">\(\mathbb{A}_{\pi, \mu}(\pi&#39;) &gt;
+0\)</span>.</p>
+<p><strong>Theorem.</strong> Let <span
+class="math inline">\(\mathbb{A}\)</span> be the policy advantage of
+<span class="math inline">\(\pi&#39;\)</span> with respect to <span
+class="math inline">\(\pi\)</span> and the starting distribution <span
+class="math inline">\(\mu\)</span>, and let <span
+class="math display">\[\varepsilon = \max_s |E_{a \sim \pi&#39;(a,
+a)}[A_\pi (s, a)]|\]</span> Then, for every <span
+class="math inline">\(\alpha \in [0,1]\)</span>: <span
+class="math display">\[\eta_\mu(\pi_{new}) - \eta_{\mu}(\pi) \geq
+\frac{\alpha}{1 - \gamma} \left( \mathbb{A} - \frac{2 \alpha \gamma
+\varepsilon}{1- \gamma(1 - \alpha)} \right)\]</span></p>
+<h2 id="beyond-mixture-policies---trpo">Beyond mixture policies -
+TRPO</h2>
+<p><em>The idea of this section was originally published in <a
+href="https://arxiv.org/abs/1502.05477">here</a></em>.</p>
+<p>Fundamentally, we are motivated by the following thought, that
+extends the result of the previous section:</p>
+<blockquote>
+<p>Surely, if there is a new candidate policy <span
+class="math inline">\(\pi&#39;\)</span>, such that it has positive
+advantage over <span class="math inline">\(\pi\)</span>, and is
+sufficiently close (in some sense), then <span
+class="math inline">\(\pi&#39;\)</span> must be a better policy than
+<span class="math inline">\(\pi\)</span>.</p>
+</blockquote>
+<p>We are going to introduce two distances. One of them is useful for
+proving a bound similar to …, and the other is useful for practical
+computations.</p>
+<p><strong>Definition.</strong> The <strong>total variation
+divergence</strong> between two discrete probability distributions <span
+class="math inline">\(p, q\)</span> over the same set is given by: <span
+class="math display">\[D_{TV}(p || q) = \frac{1}{2} \sum_i |p_i -
+q_i|\]</span> And between policies: <span
+class="math display">\[D_{TV}^\text{max}(\pi, \pi&#39;) = \max_s D_{TV}
+\big[ \pi(\cdot | s), \pi&#39;(\cdot | s) \big]\]</span></p>
+<p>We then have the following theorem, very much in the vein of the
+corresponding theorem for Mixture policies:</p>
+<p><strong>Theorem.</strong> Let <span class="math inline">\(\alpha =
+D_{TV}^{\text{max}}(\pi_{\text{old}}, \pi_{\text{new}})\)</span>. Then:
+<span class="math display">\[\eta(\pi_{\text{new}}) \geq
+L_{\pi_{\text{old}}}(\pi_{\text{new}}) - \frac{4 \varepsilon \gamma}{(1
+- \gamma)^2}\]</span></p>
+<h1 id="references">References</h1>
+<p><a
+href="https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html#deriving-the-simplest-policy-gradient">OpenAI
+Spinning up</a></p>
+<p><a href="https://dl.acm.org/doi/10.5555/645531.656005">Sham Kakade
+and John Langford. 2002. Approximately Optimal Approximate Reinforcement
+Learning. In Proceedings of the Nineteenth International Conference on
+Machine Learning (ICML ’02). Morgan Kaufmann Publishers Inc., San
+Francisco, CA, USA, 267–274.</a></p>
+<p><a href="https://dl.acm.org/doi/10.5555/645531.656005">Schulman, J.,
+Levine, S., Abbeel, P., Jordan, M.I., &amp; Moritz, P. (2015). Trust
+Region Policy Optimization. ArXiv, abs/1502.05477.</a></p>
+</body>
+</html>
