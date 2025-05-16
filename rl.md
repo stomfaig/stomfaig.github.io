@@ -1,3 +1,12 @@
+---
+title: "Introdcution to Modern Reinforcement Learning"
+author:
+  - "Gergo Stomfai"
+date: "2025-05-16"
+lang: "en"
+toc: true
+mathjax: true
+---
 
 *A few preliminary remarks.* This page is intended to be a work, where I collect resources, derivations, ideas etc. that I found useful when diving into the world of RL. In particular, it is not a hand-held, explain everything type introduction, but rather one that a person with some mathematical affinity (not much) could understand.
 As such, not everything is discussed in detail.
