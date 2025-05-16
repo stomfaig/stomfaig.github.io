@@ -9,7 +9,6 @@
   <title>My Document Title</title>
   <style>
     html {
-      font-size: 12pt;
       color: #1a1a1a;
       background-color: #fdfdfd;
     }
@@ -180,50 +179,7 @@
 <p class="date">2025-05-02</p>
 </header>
 <nav id="TOC" role="doc-toc">
-<ul>
-<li><a href="#short-intro-to-rl" id="toc-short-intro-to-rl">Short intro
-to RL</a>
-<ul>
-<li><a href="#reward-and-return" id="toc-reward-and-return">Reward and
-Return</a></li>
-<li><a href="#the-goal" id="toc-the-goal">The Goal</a></li>
-<li><a href="#a-few-useful-quantities"
-id="toc-a-few-useful-quantities">A few useful quantities</a></li>
-</ul></li>
-<li><a href="#policy-optimization-methods."
-id="toc-policy-optimization-methods.">Policy optimization methods.</a>
-<ul>
-<li><a href="#some-warmup." id="toc-some-warmup.">Some warmup.</a>
-<ul>
-<li><a href="#exact-policy-iteration."
-id="toc-exact-policy-iteration.">Exact policy iteration.</a></li>
-<li><a href="#policy-gradient." id="toc-policy-gradient.">Policy
-gradient.</a></li>
-</ul></li>
-<li><a href="#approximate-value-functions-methods."
-id="toc-approximate-value-functions-methods.">Approximate value
-functions methods.</a>
-<ul>
-<li><a href="#mixture-policies." id="toc-mixture-policies.">Mixture
-policies.</a></li>
-<li><a href="#beyond-mixture-policies---trpo"
-id="toc-beyond-mixture-policies---trpo">Beyond mixture policies -
-TRPO</a></li>
-<li><a href="#almost-trpo-ppo" id="toc-almost-trpo-ppo">Almost TRPO:
-PPO</a></li>
-</ul></li>
-<li><a href="#implementations-and-their-consequences."
-id="toc-implementations-and-their-consequences.">Implementations and
-their consequences.</a>
-<ul>
-<li><a href="#generalized-advantage-estimation."
-id="toc-generalized-advantage-estimation.">Generalized advantage
-estimation.</a></li>
-<li><a href="#grpo" id="toc-grpo">GRPO</a></li>
-</ul></li>
-</ul></li>
-<li><a href="#references" id="toc-references">References</a></li>
-</ul>
+
 </nav>
 <p><em>A few preliminary remarks.</em> This page is intended to be a
 work, where I collect resources, derivations, ideas etc. that I found
@@ -231,6 +187,13 @@ useful when diving into the world of RL. In particular, it is not a
 hand-held, explain everything type introduction, but rather one that a
 person with some mathematical affinity (not much) could understand. As
 such, not everything is discussed in detail.</p>
+<p>One way I believe it is really helpful to think about RL, especially
+within the context of this note is the connection between Differential
+Geometry and Riemannian Geometry: Fundamentally, ideas often come from
+the classical optimization literature, but have a different flavour due
+to the highly structured nature of the functions we are trying to
+optimize. I will try my best to give references to optimization material
+whenever it is appropiate to connect these fields.</p>
 <h1 id="short-intro-to-rl">Short intro to RL</h1>
 <p><em>This section is inspired by <a
 href="https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html#deriving-the-simplest-policy-gradient">1</a>.</em></p>
@@ -300,6 +263,38 @@ called the <strong>Bellman equations</strong>.</p>
 action with respect to a policy <span
 class="math inline">\(\pi\)</span>: <span
 class="math display">\[A_\pi(s, a) = Q_\pi(s, a) - V_\pi(s)\]</span></p>
+<h3 id="temporal-difference-learning.">Temporal difference
+learning.</h3>
+<p>In practice the value function is not known, and can be complicated
+to compute explicitly. One way though, in which one can try to deduce it
+is the following. A self-consistency relation of <span
+class="math inline">\(V\)</span> is the following: <span
+class="math display">\[V_\pi(s) = E_{a \sim \pi(\cdot | s) } \left[ r(s,
+a) +  V(s&#39;) \right]\]</span> Thus given a guess <span
+class="math inline">\(V\)</span> for the value function, one use can
+tweak <span class="math inline">\(V\)</span> to promote
+self-consistency:</p>
+<pre><code>Initialize V randomly
+
+while not converged:
+    Pick a state s randomly
+    Pick an action a according to pi
+    V(s) := (1 - a) V(s) + a (r(s, a) + \gamma V(s&#39;))</code></pre>
+<p>We achieve perfect self-consistency if the <em>TD-residual of V with
+discount <span class="math inline">\(\gamma\)</span></em>, given by
+<span class="math display">\[\delta_{a}^{V_{\pi, \gamma}}(s, s&#39;) =
+r(s, a) + \gamma V_{\pi}(s&#39;) - V_{\pi}(s)\]</span> satisfies <span
+class="math inline">\(E_{a \sim \pi(\cdot|s)} [\delta_{a}^{V^{\pi,
+\gamma}}(s, s&#39;)] = 0 \quad (\dagger)\)</span>.</p>
+<p>The TD-residual has another application, which we will see in the
+section on <a href="#generalized-advantage-estimation">GAE</a>. But to
+give you a foretaste, let’s fix <span class="math inline">\(s\)</span>
+and <span class="math inline">\(a\)</span> in <span
+class="math inline">\((\dagger)\)</span>, and take the expectation with
+respect to <span class="math inline">\(s&#39;\)</span>. We get: <span
+class="math display">\[\mathbb{E}_{s&#39;}[\delta_a^{V_{\pi, \gamma}}] =
+A_{\pi, \gamma}(s, a)\]</span> Without giving too much away, this idea
+can be iterated to reduce the variance of this estimation.</p>
 <h1 id="policy-optimization-methods.">Policy optimization methods.</h1>
 <p>The methods we are going to encounter are all based on iteratively
 improving a policy that we currently have to a “better one”. To make the
@@ -363,6 +358,55 @@ class="math display">\[\nabla_\theta P(\tau | \theta) = P(\tau | \theta)
     &amp;= E_{\tau \sim \pi_\theta} [\left( \sum_i \nabla_\theta \log
 \pi_{\theta}(a_i | s_i) \right) R(\tau)]
 \end{align*}\]</span></p>
+<p>Set <span class="math inline">\(R_i(\tau) = \sum_{j \geq t}
+r_j\)</span>. Then, <span class="math inline">\(R(\tau) = \sum_{i &lt;
+t} r_i + R_t(\tau)\)</span>, and consequentially: <span
+class="math display">\[\begin{align*}
+    E_{\tau \sim \pi_\theta} [\left( \sum_i \nabla_\theta \log
+\pi_{\theta}(a_i | s_i) \right) R(\tau)] &amp;= \sum_i E_{\tau \sim
+\pi_\theta}[\left(\nabla_\theta \log \pi_{\theta}(a_i | s_i) \right)
+R(\tau)]\\
+    &amp;= \sum_i E_{\tau \sim \pi_\theta}[\left(\nabla_\theta \log
+\pi_{\theta}(a_i | s_i) \right) (R_i + \sum_{j&lt;t} r_j)]\\
+    &amp;= \sum_i E_{\tau \sim \pi_\theta}[\left(\nabla_\theta \log
+\pi_{\theta}(a_i | s_i) \right) R_i]
+\end{align*}\]</span></p>
+<p>Where the last inequality follows from the fact that the action <span
+class="math inline">\(a_t\)</span> is independent of the states <span
+class="math inline">\(s_i\)</span> for <span class="math inline">\(i
+&lt; t\)</span>. This gives the <strong>past independent form</strong>
+of the policy gradient: <span
+class="math display">\[\boxed{\nabla_\theta J(\theta) = E_{\tau \sim
+\pi_\theta} [\left( \sum_i \nabla_\theta \log \pi_{\theta}(a_i | s_i)
+\right) R_i(\tau)]}\]</span></p>
+<p>Another useful trick is to notice that for <span
+class="math inline">\(s\)</span> fixed, <span
+class="math inline">\(\pi_\theta(\cdot|s)\)</span> becomes a
+parameterized distribution on <span class="math inline">\(A\)</span>. It
+is a general result, that <span class="math inline">\(E_{a \sim
+\pi_{(\cdot|s)}} [\nabla_\theta \log \pi_\theta(a|s)] = 0\)</span>. Upon
+multiplying this with a constant <span
+class="math inline">\(b(s_t)\)</span>, we obtain that <span
+class="math display">\[E_{a \sim \pi_{(\cdot|s)}} [\nabla_\theta \log
+\pi_\theta(a|s) b(s)] = 0\]</span> We can also write <span
+class="math display">\[\begin{align*}
+E_{\tau \sim \pi_{\theta}}[\nabla_\theta \log \pi_\theta(a_i|s_i)
+b(s_i)] &amp;= \sum_{s, a} P(s_i = a, a_i = a) \nabla_\theta \log
+\pi_\theta(a_i|s_i) b(s_i)\\
+&amp;= \sum_s P(s_i = s) \left[ \sum_a P(a_i = a | s_i = s)
+\nabla_\theta \log \pi_\theta(a_i|s_i) b(s_i) \right]\\
+&amp;= \sum_s P(s_i = s) \left[ E_{a \sim \pi_\theta(\cdot|s)}
+[\nabla_\theta \log \pi_\theta(a|s) b(s_i)] \right] = 0
+\end{align*}\]</span></p>
+<p>Using this claim, we can derive another unbiased estimator for the
+policy gradient:</p>
+<p><span class="math display">\[\boxed{\nabla_\theta J(\theta) = E_{\tau
+\sim \pi_\theta} [\left( \sum_i \nabla_\theta \log \pi_{\theta}(a_i |
+s_i) \right) \left( R_i(\tau) + b(s_t) \right)]} \]</span></p>
+<p>The main difference between these is that some of them have lower
+variance than the other. While it is not instrumental to know all these
+derivations inside out, it is useful to be aware of the different forms
+of the policy gradient.</p>
 <h2 id="approximate-value-functions-methods.">Approximate value
 functions methods.</h2>
 <p>One major drawback of Exact Policy Iteration is the fact that it is
@@ -446,8 +490,8 @@ class="math display">\[\eta_\mu(\pi_{new}) - \eta_{\mu}(\pi) \geq
 \varepsilon}{1- \gamma(1 - \alpha)} \right)\]</span></p>
 <h3 id="beyond-mixture-policies---trpo">Beyond mixture policies -
 TRPO</h3>
-<p><em>The idea of this section was originally published in <a
-href="https://arxiv.org/abs/1502.05477">here</a></em>.</p>
+<p><em>The idea of this section was originally published in
+[here][3]</em>.</p>
 <p>Fundamentally, we are motivated by the following thought, that
 extends the result of the previous section:</p>
 <blockquote>
@@ -504,16 +548,93 @@ href="trust_region_type_methods">trust-region type method</a>:</p>
   pi_new = argmax_pi L_{pi_i}(pi)
       such that CD_KL_max (pi_old, pi) &lt;= delta</code></pre>
 </blockquote>
-<p>One final thing to note is that one rarely encounters TRPO in the
-form we have just described. The following form of the objective is
-used:</p>
+<p><strong>Implementation.</strong> We have enough machinery now to
+think about how we might want to implement this method. We need to come
+up with a way to approxiamte <span
+class="math display">\[L_{\theta_{\text{old}}}(\theta) = \sum_s
+\rho_{\text{old}}(s) \sum_a \pi_\theta(a | s)
+A_{\theta_{\text{old}}}(s,a)\]</span></p>
+<p>The first and most obvious thing that needs to happen, is
+approximating <span class="math inline">\(\sum_s
+\rho_{\text{old}}(s)[\cdots]\)</span> with a montecarlo estiamte based
+on our data.</p>
+<p>Then, we need a way to estimate the advantage <span
+class="math inline">\(A_{\theta_{\text{old}}}\)</span>. Though there are
+several ways to do this, for now we are simply going to stick to a
+simply approximation: <span
+class="math display">\[\hat{A}_{\theta_{\text{old}}} =
+Q_{\theta_{\text{old}}}\]</span> Which is <strong>only true up to an
+additive constant</strong>, but that is good enough for our purposes.
+For another method see the section on <a
+href="#generalized-advantage-estimation">GAE</a>.</p>
+<p>Finally, we replace the sum over actions with an importance
+sampler.</p>
+<p>These three together then given the empirically computable version of
+<span class="math inline">\(L\)</span>: <span
+class="math display">\[L_{\theta_{\text{old}}} = \mathbb{E}_{s \sim
+\rho_{\text{old}}, a \sim q} \left[ \frac{\pi_\theta(a|s)}{q(a|s)}
+Q_{\theta_{\text{old}}}(s,a) \right]\]</span></p>
+<p><strong>Some practical considerations.</strong> It is now a fitting
+time to think about implementation.</p>
+<p>Another way of approximating <span
+class="math inline">\(L_{\theta_{\text{old}}}\)</span> can be found in
+the article <a href="asd">asd</a>.</p>
 <h3 id="almost-trpo-ppo">Almost TRPO: PPO</h3>
-<h2 id="implementations-and-their-consequences.">Implementations and
-their consequences.</h2>
+<p><em>See</em></p>
+<p>The conclusion of the path-sampling strategy in the <a
+href="#beyond-mixture-policies---trpo">previous section</a> was
+optimizing the objective (we omit <span
+class="math inline">\(\theta_{\text{old}}\)</span> since it is clear
+from the notation what we mean) <span class="math display">\[L(\theta) =
+\mathbb{E} \left[ \frac{\pi_\theta(a_t |
+s_t)}{\pi_{\theta_{\text{old}}}(a_t| s_t)} \hat{A}_t \right]\]</span>
+For ease of notation, we denote the quantity <span
+class="math inline">\(\frac{\pi_\theta(a_t |
+s_t)}{\pi_{\theta_{\text{old}}}(a_t| s_t)}\)</span> by <span
+class="math inline">\(r_t(\theta)\)</span>. Intuitively, if <span
+class="math inline">\(r_t(\theta)\)</span> is far from <span
+class="math inline">\(1\)</span>, the updates can be jerky and large.
+This is undesirable for many reasons, which we won’t go into in too much
+detail, but here is an illustrative tale from the world of
+optimization.</p>
+<blockquote>
+<p>tale from opti</p>
+</blockquote>
+<p>One way to ensure this, is to disincentivise the model from making
+large changes in the policy. As you can (and should) check, the
+following objective does exactly that:</p>
+<p><span class="math display">\[L(\theta) = \mathbb{E} \left\{ \min
+\left[ r_t(\theta) A_t, \operatorname{clip}(r_t(\theta, 1- \epsilon, 1 +
+\epsilon)) \right] \right\}\]</span></p>
 <h3 id="generalized-advantage-estimation.">Generalized advantage
 estimation.</h3>
+<p><em>This section is based on <a
+href="https://arxiv.org/abs/1506.02438">Schulman et.
+al. 2015</a>.</em></p>
+<p>We have already seen the need for a way to approximate the advantage
+<span class="math inline">\(A_t(a)\)</span> if an action compared to
+some reference policy. In the case of TRPO we chose one of the easiest
+routes. We now describe a more elaborate one.</p>
+<p>As promised in the section on <a
+href="#temporal-difference-learning">Temporal Difference Learning</a>,
+the core comes from the fact that <span
+class="math inline">\(\mathbb{E}_{s&#39;}[\delta_a^{V_{\pi, \gamma}}] =
+A_{\pi, \gamma}(s, a)\)</span>. In fact, we consider the estimates <span
+class="math inline">\(\hat{A}_t^{(i)}\)</span> given by:</p>
 <h3 id="grpo">GRPO</h3>
-<h1 id="references">References</h1>
+<p><em>This section is based on [asd]</em>.</p>
+<p>The fundamental idea here can be explained as follows.</p>
+<blockquote>
+<p>In PPO (and TRPO for that regard), we need a way to approximate the
+advantage <span class="math inline">\(A_\pi(s, a)\)</span>. We could
+simply use <span class="math inline">\(Q_\pi(s,a)\)</span>, but this is
+usually has high variance. We could instead use GAE, but then one also
+needs to train a value model <span class="math inline">\(V\)</span>,
+which can be similar in size and complexity to the main policy
+model.</p>
+</blockquote>
+<hr />
+<p><em>References.</em></p>
 <p><a
 href="https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html#deriving-the-simplest-policy-gradient">OpenAI
 Spinning up</a></p>
@@ -522,8 +643,12 @@ and John Langford. 2002. Approximately Optimal Approximate Reinforcement
 Learning. In Proceedings of the Nineteenth International Conference on
 Machine Learning (ICML ’02). Morgan Kaufmann Publishers Inc., San
 Francisco, CA, USA, 267–274.</a></p>
-<p><a href="https://dl.acm.org/doi/10.5555/645531.656005">Schulman, J.,
-Levine, S., Abbeel, P., Jordan, M.I., &amp; Moritz, P. (2015). Trust
-Region Policy Optimization. ArXiv, abs/1502.05477.</a></p>
+<p><a href="https://arxiv.org/abs/1502.05477">Schulman, J., Levine, S.,
+Abbeel, P., Jordan, M.I., &amp; Moritz, P. (2015). Trust Region Policy
+Optimization. ArXiv, abs/1502.05477.</a></p>
+<p><a href="https://arxiv.org/abs/1506.02438">Schulman, J., Moritz, P.,
+Levine, S., Jordan, M., &amp; Abbeel, P. (2015). High-dimensional
+continuous control using generalized advantage estimation. arXiv
+preprint arXiv:1506.02438.</a></p>
 </body>
 </html>
