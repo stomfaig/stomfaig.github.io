@@ -1,0 +1,663 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="['Gergo Stomfai']">
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Introdcution to Modern Reinforcement Learning - Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#short-intro-to-rl" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Notes" class="md-header__button md-logo" aria-label="Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Introdcution to Modern Reinforcement Learning
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Notes" class="md-nav__button md-logo" aria-label="Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdcution to Modern Reinforcement Learning
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdcution to Modern Reinforcement Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#reward-and-return" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reward and Return
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-goal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Goal
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-few-useful-quantities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A few useful quantities
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#temporal-difference-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Temporal difference learning.
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#reward-and-return" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reward and Return
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-goal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Goal
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-few-useful-quantities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A few useful quantities
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#temporal-difference-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Temporal difference learning.
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p><em>A few preliminary remarks.</em> This page is intended to be a work, where I collect resources, derivations, ideas etc. that I found useful when diving into the world of RL. In particular, it is not a hand-held, explain everything type introduction, but rather one that a person with some mathematical affinity (not much) could understand. As such, not everything is discussed in detail.   </p>
+<p>One way I believe it is really helpful to think about RL, especially within the context of this note is the connection between Differential Geometry and Riemannian Geometry: Fundamentally, ideas often come from the classical optimization literature, but have a different flavour due to the highly structured nature of the functions we are trying to optimize. I will try my best to give references to optimization material whenever it is appropiate to connect these fields.</p>
+<h1 id="short-intro-to-rl">Short intro to RL</h1>
+<p><em>This section is inspired by <a href="https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html#deriving-the-simplest-policy-gradient">1</a>.</em></p>
+<p><strong>Action space:</strong> The space of actions a model can take in a given situation.</p>
+<p>We can define <strong>policies</strong> given action spaces. A <strong>policy</strong> is simply a mapping (deterministic or not) from the current state of the system to a possible action. If a policy is deterministic, we have:
+$<span class="arithmatex">\(a_t = \mu(s_t)\)</span>$
+And if it is stochastic:
+$$ a_t \sim \mu(\cdot | s_t)$$</p>
+<p><strong>Remark.</strong> We can think of deterministic policies as functions mapping from the state to the action. We can think of non-deterministic policies as classifiers.</p>
+<p>The <strong>trajectory</strong> of a system is simply the sequence of states and actions in the world</p>
+<div class="arithmatex">\[\tau = (s_0, a_0, s_1, \ldots)\]</div>
+<p>The way the next state of the system is determined based on the current one is governed by the <strong>natural laws of the environment</strong>:
+$<span class="arithmatex">\(s_{t+1} = f(s_t, a_t)\)</span>$
+Obviously <span class="arithmatex">\(f\)</span> can also be stochastic.</p>
+<h3 id="reward-and-return">Reward and Return</h3>
+<p>There are several way in which the reward for a given action is determined:</p>
+<p>$<span class="arithmatex">\(r_t = R(s_t, a_t, s_{t+1})\)</span>$
+$<span class="arithmatex">\(r_t = R(s_t, a_t)\)</span>$
+$<span class="arithmatex">\(r_t = R(s_t)\)</span>$
+The main difference here is that what actually determines the reward. In the first case, the current state, the action and the next state all matters. Maybe the next state doesn't matter (2nd case). Or maybe the only thing that matters is the current state. One can easily come up with "real world" examples to all these.<br />
+There are also different ways in which we can define the return of trajectory:
+$<span class="arithmatex">\(R(\tau) = \sum_{t}^T r_t\)</span>$
+$<span class="arithmatex">\(R(\tau) = \sum_{t} \gamma^t r_t\)</span>$
+these are for the cases when the time horizon is finite, or infinite respectively.</p>
+<h3 id="the-goal">The Goal</h3>
+<p>We are now in position to state the goal of RL. Given a model of the universe, consider a policy <span class="arithmatex">\(\pi\)</span> and the distribution <span class="arithmatex">\(P(\tau|\pi)\)</span>, which determines how likely a certain trajectory is given the policy and the laws of the universe. Then, our aim is to solve the problem</p>
+<div class="arithmatex">\[\pi^* = \arg \max_\pi E_{\tau \sim P(\cdot | \pi)} [T(\tau)]\]</div>
+<p>Where the solution <span class="arithmatex">\(\pi^*\)</span> is called the optimal policy.</p>
+<h3 id="a-few-useful-quantities">A few useful quantities</h3>
+<p>Here we list the definition of a few quantities, that are useful when comparing policies.</p>
+<div class="arithmatex">\[\textbf{On-policy value function:} \quad V_\pi(s) = E_{\tau \sim \pi}[R(\tau) | s_0 = s]$$
+$$\textbf{On-policy action-value function:} \quad Q_\pi(s, a) = E_{\tau \sim \pi}[R(\tau) | s_0 = s, a_0 = a]$$
+$$\textbf{Optimal value function:} \quad V_*(s) = \sup_{\pi} E_{\tau \sim \pi}[R(\tau) | s_0 = s]$$
+$$\textbf{Optimal action-value function:} \quad Q_*(s, a) = \sup_{\pi} E_{\tau \sim \pi}[R(\tau) | s_0 = s, a_0 = a]\]</div>
+<p>One can "peel off" the first action in the "value type"- and the first state change of the world in the "action-value" type equations, to get a self-consistency condition between these quantities. These are called the <strong>Bellman equations</strong>.  </p>
+<p>We can also define the <strong>advantage function</strong> of an action with respect to a policy <span class="arithmatex">\(\pi\)</span>:
+$<span class="arithmatex">\(A_\pi(s, a) = Q_\pi(s, a) - V_\pi(s)\)</span>$</p>
+<h3 id="temporal-difference-learning">Temporal difference learning.</h3>
+<p>In practice the value function is not known, and can be complicated to compute explicitly. One way though, in which one can try to deduce it is the following. A self-consistency relation of <span class="arithmatex">\(V\)</span> is the following:
+$<span class="arithmatex">\(V_\pi(s) = E_{a \sim \pi(\cdot | s) } \left[ r(s, a) +  V(s') \right]\)</span>$
+Thus given a guess <span class="arithmatex">\(V\)</span> for the value function, one use can tweak <span class="arithmatex">\(V\)</span> to promote self-consistency:</p>
+<pre><code>Initialize V randomly
+
+while not converged:
+    Pick a state s randomly
+    Pick an action a according to pi
+    V(s) := (1 - a) V(s) + a (r(s, a) + \gamma V(s'))
+</code></pre>
+<p>We achieve perfect self-consistency if the <em>TD-residual of V with discount <span class="arithmatex">\(\gamma\)</span></em>, given by
+$<span class="arithmatex">\(\delta_{a}^{V_{\pi, \gamma}}(s, s') = r(s, a) + \gamma V_{\pi}(s') - V_{\pi}(s)\)</span>$
+satisfies <span class="arithmatex">\(E_{a \sim \pi(\cdot|s)} [\delta_{a}^{V^{\pi, \gamma}}(s, s')] = 0 \quad (\dagger)\)</span>.  </p>
+<p>The TD-residual has another application, which we will see in the section on <a href="#generalized-advantage-estimation">GAE</a>. But to give you a foretaste, let's fix <span class="arithmatex">\(s\)</span> and <span class="arithmatex">\(a\)</span> in <span class="arithmatex">\((\dagger)\)</span>, and take the expectation with respect to <span class="arithmatex">\(s'\)</span>. We get:
+$<span class="arithmatex">\(\mathbb{E}_{s'}[\delta_a^{V_{\pi, \gamma}}] = A_{\pi, \gamma}(s, a)\)</span>$
+Without giving too much away, this idea can be iterated to reduce the variance of this estimation.</p>
+<h1 id="policy-optimization-methods">Policy optimization methods.</h1>
+<p>The methods we are going to encounter are all based on iteratively improving a policy that we currently have to a "better one". To make the subject of the discussion more clear, we more explicitly clarify the objectives of the iterative processes we are to constrcuct: </p>
+<ol>
+<li>We our method to increase some performance measure of the policy every step.  </li>
+<li>We want to be able to verify that our method is improving the quantity that it is trying to increase.  </li>
+<li>We want to be able to investigate the asymptotic behavior of the method.  </li>
+</ol>
+<h2 id="some-warmup">Some warmup.</h2>
+<h3 id="exact-policy-iteration">Exact policy iteration.</h3>
+<p>The basic idea is the following. If we have access to the exact value function, given a policy <span class="arithmatex">\(\pi\)</span>, we can compute <span class="arithmatex">\(Q_\pi(s, a)\)</span> explicitly for each <span class="arithmatex">\((s,a)\)</span> pair, and create a new deterministic policy <span class="arithmatex">\(\pi'\)</span>, such that
+$<span class="arithmatex">\(\pi'(a;s) = \text{\)</span>1$ iff <span class="arithmatex">\(a = \arg \max_a Q_\pi(s,a)\)</span>, <span class="arithmatex">\(0\)</span> otherwise}$$</p>
+<h3 id="policy-gradient">Policy gradient.</h3>
+<p>To take the theory out for a spin, consider the following. Let <span class="arithmatex">\(\pi_\theta\)</span> be a parametric family of policies. Suppose that the initial state of the universe is determined by some initial distribution <span class="arithmatex">\(\rho_0\)</span>. Then, our aim is to find the policy which would maximize the expression
+$<span class="arithmatex">\(J(\theta) = E_{\tau \sim \pi_\theta} [R(\tau)]\)</span>$
+An intuitive way to do this would be to compute the gradient <span class="arithmatex">\(\nabla_\theta J(\theta)\)</span>, and perform some form of gradient optimization method.<br />
+Let us start by investigating how changing theta affects the evolution of the universe by thinking about <span class="arithmatex">\(\nabla_\theta P(\tau | \theta)\)</span>. By the <em>"log-derivative trick"</em>:
+$$\nabla_\theta P(\tau | \pi_\theta) = P(\tau | \pi_\theta) \left( \nabla_\theta \log P(\tau | \pi_{\theta}) \right) $$
+The probability of a trajectory <span class="arithmatex">\(\tau = (s_0, a_0, \ldots)\)</span> given an initial distribution <span class="arithmatex">\(\rho_0\)</span> is given by:
+$<span class="arithmatex">\(P(\tau | \theta) = \rho(s_0) \prod_i P(s_{i+1} ; s_i, a_i) \pi_{\theta}(a_i | s_i)\)</span>$
+This way
+$<span class="arithmatex">\(\log P(\tau | \theta) = \log \rho (s_0) + \sum_i \log P(s_{i+1}; s_i, a_i) + \log \pi_{\theta}(a_i|s_i)\)</span>$
+So if now we take the derivative of this with respect to <span class="arithmatex">\(\theta\)</span>, all the <span class="arithmatex">\(P(s_{i+1}; s_i, a_i)\)</span> terms will vanish, since they are not dependent on the parameter <span class="arithmatex">\(\theta\)</span>. Hence:
+$<span class="arithmatex">\(\nabla_\theta P(\tau | \theta) = P(\tau | \theta) \left( \sum_i \nabla_\theta \log \pi_{\theta}(a_i | s_i) \right)\)</span>$
+So then, 
+$<span class="arithmatex">\(\begin{align*} 
+    \nabla_\theta J(\theta) &amp;= E_{\tau \sim \pi_\theta} [R(\tau)]\\
+    &amp;= \nabla_\theta \int_\tau P(\tau | \theta) R(\tau)\\
+    &amp;= \int_\tau P(\tau | \theta) \left( \sum_i \nabla_\theta \log \pi_{\theta}(a_i | s_i) \right) R(\tau)\\
+    &amp;= E_{\tau \sim \pi_\theta} [\left( \sum_i \nabla_\theta \log \pi_{\theta}(a_i | s_i) \right) R(\tau)]
+\end{align*}\)</span>$</p>
+<p>Set <span class="arithmatex">\(R_i(\tau) = \sum_{j \geq t} r_j\)</span>. Then, <span class="arithmatex">\(R(\tau) = \sum_{i &lt; t} r_i + R_t(\tau)\)</span>, and consequentially:
+$<span class="arithmatex">\(\begin{align*}
+    E_{\tau \sim \pi_\theta} [\left( \sum_i \nabla_\theta \log \pi_{\theta}(a_i | s_i) \right) R(\tau)] &amp;= \sum_i E_{\tau \sim \pi_\theta}[\left(\nabla_\theta \log \pi_{\theta}(a_i | s_i) \right) R(\tau)]\\
+    &amp;= \sum_i E_{\tau \sim \pi_\theta}[\left(\nabla_\theta \log \pi_{\theta}(a_i | s_i) \right) (R_i + \sum_{j&lt;t} r_j)]\\
+    &amp;= \sum_i E_{\tau \sim \pi_\theta}[\left(\nabla_\theta \log \pi_{\theta}(a_i | s_i) \right) R_i]
+\end{align*}\)</span>$</p>
+<p>Where the last inequality follows from the fact that the action <span class="arithmatex">\(a_t\)</span> is independent of the states <span class="arithmatex">\(s_i\)</span> for <span class="arithmatex">\(i &lt; t\)</span>. This gives the <strong>past independent form</strong> of the policy gradient:
+$<span class="arithmatex">\(\boxed{\nabla_\theta J(\theta) = E_{\tau \sim \pi_\theta} [\left( \sum_i \nabla_\theta \log \pi_{\theta}(a_i | s_i) \right) R_i(\tau)]}\)</span>$</p>
+<p>Another useful trick is to notice that for <span class="arithmatex">\(s\)</span> fixed, <span class="arithmatex">\(\pi_\theta(\cdot|s)\)</span> becomes a parameterized distribution on <span class="arithmatex">\(A\)</span>. It is a general result, that <span class="arithmatex">\(E_{a \sim \pi_{(\cdot|s)}} [\nabla_\theta \log \pi_\theta(a|s)] = 0\)</span>. Upon multiplying this with a constant <span class="arithmatex">\(b(s_t)\)</span>, we obtain that 
+$<span class="arithmatex">\(E_{a \sim \pi_{(\cdot|s)}} [\nabla_\theta \log \pi_\theta(a|s) b(s)] = 0\)</span>$
+We can also write 
+$<span class="arithmatex">\(\begin{align*}
+E_{\tau \sim \pi_{\theta}}[\nabla_\theta \log \pi_\theta(a_i|s_i) b(s_i)] &amp;= \sum_{s, a} P(s_i = a, a_i = a) \nabla_\theta \log \pi_\theta(a_i|s_i) b(s_i)\\
+&amp;= \sum_s P(s_i = s) \left[ \sum_a P(a_i = a | s_i = s) \nabla_\theta \log \pi_\theta(a_i|s_i) b(s_i) \right]\\
+&amp;= \sum_s P(s_i = s) \left[ E_{a \sim \pi_\theta(\cdot|s)} [\nabla_\theta \log \pi_\theta(a|s) b(s_i)] \right] = 0
+\end{align*}\)</span>$</p>
+<p>Using this claim, we can derive another unbiased estimator for the policy gradient:</p>
+<div class="arithmatex">\[\boxed{\nabla_\theta J(\theta) = E_{\tau \sim \pi_\theta} [\left( \sum_i \nabla_\theta \log \pi_{\theta}(a_i | s_i) \right) \left( R_i(\tau) + b(s_t) \right)]} \]</div>
+<p>The main difference between these is that some of them have lower variance than the other. While it is not instrumental to know all these derivations inside out, it is useful to be aware of the different forms of the policy gradient.</p>
+<h2 id="approximate-value-functions-methods">Approximate value functions methods.</h2>
+<p>One major drawback of Exact Policy Iteration is the fact that it is only guaranteed to improve the performance of the policy, if the new policy has non-negative advantage in every state. This is very hard to guarantee in practice. Thus, instead of trying to optimize <span class="arithmatex">\(\eta(\pi)\)</span> directly, we are going to define a <em>surrogate</em> objective function. To do this let us fix some notation first.  </p>
+<p>Suppose that we have a fixed initial distribution, say <span class="arithmatex">\(\mu\)</span>. We will implicitly assume that this exists, but won't mention that it exists very often. Then, the <em>discounted visitation frequencies</em> are given by:
+$<span class="arithmatex">\(\rho_\pi(s) = P(s_0 = s) + \gamma P(s_1 = s) + \cdots\)</span>$
+And the <em>policy advantage</em> <span class="arithmatex">\(\mathbb{A}_{\pi}(\pi')\)</span> of a policy <span class="arithmatex">\(\pi'\)</span> over another policy <span class="arithmatex">\(\pi\)</span> as
+$<span class="arithmatex">\(\mathbb{A}_{\pi}(\pi') = E_{s \sim d_{\pi, \mu}} [E_{a \sim \pi'(a;s)} [A_\pi(s, a)]]\)</span>$
+We claim that the function <span class="arithmatex">\(L_\pi(\pi_\theta) = J(\pi) + \mathbb{A}_{\pi} (\pi_\theta)\)</span> (as a function of <span class="arithmatex">\(\theta\)</span>) matches <span class="arithmatex">\(J(\pi_\theta)\)</span> up to first order. One way to prove this, is to consider the expansion:
+$<span class="arithmatex">\(\begin{align*}
+    J(\pi_\theta) &amp;= J(\pi) + \sum_t \sum_s P(s_t = s | \pi_\theta) \sum_a \pi_\theta(a | s) \gamma^t A_\pi(s, a)\\
+    &amp;= \cdots\\
+    &amp;= J(\pi) + \sum_s \rho_{\pi_\theta}(s) \sum_a \pi_\theta(a|s) A_\pi(s,a)
+\end{align*}\)</span>$
+And then take the derivative and compare it to the derivative of <span class="arithmatex">\(L\)</span>.</p>
+<p><strong>Exercise.</strong> Fill the gaps in the previous expansion.  </p>
+<p><strong>Exercise.</strong> Using the outline above, or in any other way, prove that <span class="arithmatex">\(L_\pi(\pi_\theta)\)</span> agrees with <span class="arithmatex">\(J(\pi_\theta)\)</span> up to first order.</p>
+<p>There is a natural question to ask now:</p>
+<blockquote>
+<p>We could simply optimize <span class="arithmatex">\(J\)</span> by substituting it with <span class="arithmatex">\(L\)</span>, and using some sort of gradient based method. But how long should our step size be? Is there any way to use the fact that <span class="arithmatex">\(L\)</span> and <span class="arithmatex">\(J\)</span> are not just arbitrary functions, but have a fair amount of structure due to the fact that they arise as RL reward functions?</p>
+</blockquote>
+<h3 id="mixture-policies">Mixture policies.</h3>
+<p><em>The idea of this section was originally published in <a href="https://dl.acm.org/doi/10.5555/645531.656005">here</a></em>.</p>
+<p>Let's try to apply the previous idea in the simples setting, i.e. along a line.
+$<span class="arithmatex">\(\pi_{\text{new}}^{\alpha}(a;s) = (1 - \alpha) \pi(a;s) + \alpha \pi'(a; s)\)</span>$
+Where <span class="arithmatex">\(0 \leq \alpha \leq 1\)</span>. We have:</p>
+<p>$<span class="arithmatex">\(\begin{align*}
+J(\pi_\text{new}^\alpha) &amp;= L_\pi(\pi') + O(\alpha^2)\\
+&amp;= J(\pi) + \mathbb{A}_{\pi}((1- \alpha) \pi + \alpha \pi') + O(\alpha^2)\\
+&amp;= J(\pi) + \alpha \mathbb{A}_{\pi}(\pi') + O(\alpha^2)
+\end{align*}\)</span>$
+That is:
+$<span class="arithmatex">\(\frac{\partial J}{\partial \alpha} \bigg|_{\alpha = 0} = \frac{1}{1-\gamma} \mathbb{A}_{\pi, \mu}(\pi')\)</span>$
+Thus a positive advantage implies the existence of a sufficiently small <span class="arithmatex">\(\alpha\)</span> such that the policy <span class="arithmatex">\(\pi_{\text{new}}\)</span> is better than <span class="arithmatex">\(\pi\)</span>.</p>
+<p><strong>Theorem.</strong> Let <span class="arithmatex">\(\mathbb{A}\)</span> be the policy advantage of <span class="arithmatex">\(\pi'\)</span> with respect to <span class="arithmatex">\(\pi\)</span> and the starting distribution <span class="arithmatex">\(\mu\)</span>, and let
+$<span class="arithmatex">\(\varepsilon = \max_s |E_{a \sim \pi'(a, a)}[A_\pi (s, a)]|\)</span>$
+Then, for every <span class="arithmatex">\(\alpha \in [0,1]\)</span>:
+$<span class="arithmatex">\(\eta_\mu(\pi_{new}) - \eta_{\mu}(\pi) \geq \frac{\alpha}{1 - \gamma} \left( \mathbb{A} - \frac{2 \alpha \gamma \varepsilon}{1- \gamma(1 - \alpha)} \right)\)</span>$</p>
+<h3 id="beyond-mixture-policies-trpo">Beyond mixture policies - TRPO</h3>
+<p><em>The idea of this section was originally published in [here][3]</em>.</p>
+<p>Fundamentally, we are motivated by the following thought, that extends the result of the previous section:</p>
+<blockquote>
+<p>Surely, if there is a new candidate policy <span class="arithmatex">\(\pi'\)</span>, such that it has positive advantage over <span class="arithmatex">\(\pi\)</span>, and is sufficiently close (in some sense), then <span class="arithmatex">\(\pi'\)</span> must be a better policy than <span class="arithmatex">\(\pi\)</span>.</p>
+</blockquote>
+<p>We are going to introduce two distances. One of them is useful for proving a bound similar to ..., and the other is useful for practical computations.</p>
+<p><strong>Definition.</strong> The <strong>total variation divergence</strong> between two discrete probability distributions <span class="arithmatex">\(p, q\)</span> over the same set is given by:
+$<span class="arithmatex">\(D_{TV}(p || q) = \frac{1}{2} \sum_i |p_i - q_i|\)</span>$
+And between policies:
+$<span class="arithmatex">\(D_{TV}^\text{max}(\pi, \pi') = \max_s D_{TV} \big[ \pi(\cdot | s), \pi'(\cdot | s) \big]\)</span>$</p>
+<p>We then have the following theorem, very much in the vein of the corresponding theorem for Mixture policies:</p>
+<p><strong>Theorem.</strong> Let <span class="arithmatex">\(\alpha = D_{TV}^{\text{max}}(\pi_{\text{old}}, \pi_{\text{new}})\)</span>. Then:
+$<span class="arithmatex">\(\eta(\pi_{\text{new}}) \geq L_{\pi_{\text{old}}}(\pi_{\text{new}}) - \frac{4 \varepsilon \gamma}{(1 - \gamma)^2} \alpha^2\)</span>$</p>
+<p>Now, in practice computing the total variation divergence is not always feasible. It turns out though that it relates to the KL-divergence in a very useful way:
+$<span class="arithmatex">\(D_{\text{TV}}(p || q)^2 \leq D_{\text{KL}}(p || q)\)</span>$
+And we set
+$<span class="arithmatex">\(D_{\text{KL}}^{\text{max}} (\pi, \tilde{\pi}) = \max_s D_{\text{KL}}(\pi(\cdot | s) || \tilde{\pi}(\cdot | s))\)</span>$
+Which yields the following form of the above theorem:
+$<span class="arithmatex">\(\eta(\tilde{\pi}) \geq L_{\pi}(\tilde{\pi}) - \frac{4 \varepsilon \gamma}{(1 - \gamma)^2} D_{\text{KL}}^{\text{max}}( \pi, \tilde{\pi})\)</span>$</p>
+<p>An interesting remark to note here.</p>
+<blockquote>
+<p>We could consider the policy optimization iteration given by the pseudocode:<br />
+<code>while (not converged):  
+  pi_new = argmax_pi L_{pi_i}(pi) - CD_KL_max (pi_old, pi)</code>
+Which can easily be shown to monotonically improve the policy in every iteration. The interesting thing is to note the similarity between this method and <a href="proximal_methods">proximal methods</a> in optimization theory. It turns out, that if one simply optimizes this objective function with the constant <span class="arithmatex">\(C\)</span> as suggested above, the step sizes of the method end up being really small. Instead, one can consider a <a href="trust_region_type_methods">trust-region type method</a>:
+<code>while (not converged):  
+  pi_new = argmax_pi L_{pi_i}(pi)
+      such that CD_KL_max (pi_old, pi) &lt;= delta</code></p>
+</blockquote>
+<p><strong>Implementation.</strong> We have enough machinery now to think about how we might want to implement this method. We need to come up with a way to approxiamte
+$<span class="arithmatex">\(L_{\theta_{\text{old}}}(\theta) = \sum_s \rho_{\text{old}}(s) \sum_a \pi_\theta(a | s) A_{\theta_{\text{old}}}(s,a)\)</span>$</p>
+<p>The first and most obvious thing that needs to happen, is approximating <span class="arithmatex">\(\sum_s \rho_{\text{old}}(s)[\cdots]\)</span> with a montecarlo estiamte based on our data.  </p>
+<p>Then, we need a way to estimate the advantage <span class="arithmatex">\(A_{\theta_{\text{old}}}\)</span>. Though there are several ways to do this, for now we are simply going to stick to a simply approximation:
+$<span class="arithmatex">\(\hat{A}_{\theta_{\text{old}}} = Q_{\theta_{\text{old}}}\)</span>$
+Which is <strong>only true up to an additive constant</strong>, but that is good enough for our purposes. For another method see the section on <a href="#generalized-advantage-estimation">GAE</a>.</p>
+<p>Finally, we replace the sum over actions with an importance sampler.  </p>
+<p>These three together then given the empirically computable version of <span class="arithmatex">\(L\)</span>:
+$<span class="arithmatex">\(L_{\theta_{\text{old}}} = \mathbb{E}_{s \sim \rho_{\text{old}}, a \sim q} \left[ \frac{\pi_\theta(a|s)}{q(a|s)} Q_{\theta_{\text{old}}}(s,a) \right]\)</span>$</p>
+<p><strong>Some practical considerations.</strong> It is now a fitting time to think about implementation.</p>
+<p>Another way of approximating <span class="arithmatex">\(L_{\theta_{\text{old}}}\)</span> can be found in the article <a href="asd">asd</a>. </p>
+<h3 id="almost-trpo-ppo">Almost TRPO: PPO</h3>
+<p><em>See</em></p>
+<p>The conclusion of the path-sampling strategy in the <a href="#beyond-mixture-policies---trpo">previous section</a> was optimizing the objective (we omit <span class="arithmatex">\(\theta_{\text{old}}\)</span> since it is clear from the notation what we mean)
+$<span class="arithmatex">\(L(\theta) = \mathbb{E} \left[ \frac{\pi_\theta(a_t | s_t)}{\pi_{\theta_{\text{old}}}(a_t| s_t)} \hat{A}_t \right]\)</span>$
+For ease of notation, we denote the quantity <span class="arithmatex">\(\frac{\pi_\theta(a_t | s_t)}{\pi_{\theta_{\text{old}}}(a_t| s_t)}\)</span> by <span class="arithmatex">\(r_t(\theta)\)</span>. Intuitively, if <span class="arithmatex">\(r_t(\theta)\)</span> is far from <span class="arithmatex">\(1\)</span>, the updates can be jerky and large. This is undesirable for many reasons, which we won't go into in too much detail, but here is an illustrative tale from the world of optimization.</p>
+<blockquote>
+<p>tale from opti</p>
+</blockquote>
+<p>One way to ensure this, is to disincentivise the model from making large changes in the policy. As you can (and should) check, the following objective does exactly that:</p>
+<div class="arithmatex">\[L(\theta) = \mathbb{E} \left\{ \min \left[ r_t(\theta) A_t, \operatorname{clip}(r_t(\theta, 1- \epsilon, 1 + \epsilon)) \right] \right\}\]</div>
+<h3 id="generalized-advantage-estimation">Generalized advantage estimation.</h3>
+<p><em>This section is based on <a href="https://arxiv.org/abs/1506.02438">Schulman et. al. 2015</a>.</em></p>
+<p>We have already seen the need for a way to approximate the advantage <span class="arithmatex">\(A_t(a)\)</span> if an action compared to some reference policy. In the case of TRPO we chose one of the easiest routes. We now describe a more elaborate one.  </p>
+<p>As promised in the section on <a href="#temporal-difference-learning">Temporal Difference Learning</a>, the core comes from the fact that <span class="arithmatex">\(\mathbb{E}_{s'}[\delta_a^{V_{\pi, \gamma}}] = A_{\pi, \gamma}(s, a)\)</span>. In fact, we consider the estimates <span class="arithmatex">\(\hat{A}_t^{(i)}\)</span> given by:</p>
+<h3 id="grpo">GRPO</h3>
+<p><em>This section is based on [asd]</em>.  </p>
+<p>The fundamental idea here can be explained as follows.</p>
+<blockquote>
+<p>In PPO (and TRPO for that regard), we need a way to approximate the advantage <span class="arithmatex">\(A_\pi(s, a)\)</span>. We could simply use <span class="arithmatex">\(Q_\pi(s,a)\)</span>, but this is usually has high variance. We could instead use GAE, but then one also needs to train a value model <span class="arithmatex">\(V\)</span>, which can be similar in size and complexity to the main policy model.</p>
+</blockquote>
+<hr />
+<p><em>References.</em></p>
+<p><a href="https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html#deriving-the-simplest-policy-gradient">OpenAI Spinning up</a>  </p>
+<p><a href="https://dl.acm.org/doi/10.5555/645531.656005">Sham Kakade and John Langford. 2002. Approximately Optimal Approximate Reinforcement Learning. In Proceedings of the Nineteenth International Conference on Machine Learning (ICML '02). Morgan Kaufmann Publishers Inc., San Francisco, CA, USA, 267–274.</a></p>
+<p><a href="https://arxiv.org/abs/1502.05477">Schulman, J., Levine, S., Abbeel, P., Jordan, M.I., &amp; Moritz, P. (2015). Trust Region Policy Optimization. ArXiv, abs/1502.05477.</a></p>
+<p><a href="https://arxiv.org/abs/1506.02438">Schulman, J., Moritz, P., Levine, S., Jordan, M., &amp; Abbeel, P. (2015). High-dimensional continuous control using generalized advantage estimation. arXiv preprint arXiv:1506.02438.</a></p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
