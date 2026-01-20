@@ -12,7 +12,6 @@ for file in $INPUT/*.md; do
   pandoc "$file" \
     --template=templates/page.html \
     --mathjax \
-    --highlight-style=pygments \
     -o "$OUTPUT/$name.html"
 done
 
