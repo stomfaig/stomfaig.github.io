@@ -15,5 +15,3 @@ for file in $INPUT/*.md; do
     -o "$OUTPUT/$name.html"
 done
 
-cp -r static "$OUTPUT/"
-
