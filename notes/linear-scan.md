@@ -1,7 +1,7 @@
-# Linear scan and the benefits of SSA
-
-*SSA form is a standard intermediate representation used in most modern compilers. Beyond its practical convenience, it has a remarkable theoretical property: it makes the register allocation problem — NP-hard in general — solvable optimally in polynomial time. This article explains why.*
-
+---
+title: Linear scan and the benefits of SSA
+date: 2026-03-19
+description: SSA form is a standard intermediate representation used in most modern compilers. Beyond its practical convenience, it has a remarkable theoretical property — it makes the register allocation problem, NP-hard in general, solvable optimally in polynomial time.
 ---
 
 SSA (static single assignment) is a well-known concept in IR design. It is defined by the characteristic, that each value is assigned exactly once. For example:

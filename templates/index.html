@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Notes of G. Stomfai</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .site-header {
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #ddd;
+    }
+    .site-header h1 {
+      margin-bottom: 0.25rem;
+    }
+    .site-header .tagline {
+      margin: 0 0 0.9rem;
+      color: #666;
+      font-size: 0.95rem;
+    }
+    .site-header .bio {
+      margin: 0;
+      color: #555;
+      font-size: 0.95rem;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+    .article-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .article-list li {
+      position: relative;
+      padding: 1.1rem 0.6rem;
+      margin: 0 -0.6rem;
+      border-bottom: 1px solid #eee;
+      border-radius: 6px;
+      background: transparent;
+      transition: background 0.2s ease;
+      cursor: pointer;
+    }
+    .article-list li:hover {
+      background: #f4f4f4;
+    }
+    .article-list li:last-child {
+      border-bottom: none;
+    }
+    .article-list a {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #2c3e50;
+      text-decoration: none;
+    }
+    .article-list a::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+    }
+    .article-meta {
+      font-size: 0.82rem;
+      color: #999;
+      margin: 0.15rem 0 0.3rem;
+    }
+    .article-blurb {
+      margin: 0;
+      color: #555;
+      font-size: 0.92rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="site-header">
+      <h1>Notes of G. Stomfai</h1>
+      <p class="tagline">Writing on compilers, computer architecture, and mathematics.</p>
+      <p class="bio"></p>
+    </div>
+    <ul class="article-list">
+ARTICLES_PLACEHOLDER
+    </ul>
+  </main>
+</body>
+</html>
