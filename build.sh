@@ -15,6 +15,7 @@ for file in $INPUT/*.md; do
   name=$(basename "$file" .md)
   pandoc "$file" \
     -f markdown+fenced_divs \
+    --lua-filter=templates/sidenotes.lua \
     --template=templates/page.html \
     --mathjax \
     --css=style.css \

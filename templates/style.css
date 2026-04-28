@@ -1,8 +1,57 @@
 body {
   font-family: Georgia, serif;
-  max-width: 800px;
-  margin: auto;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
   line-height: 1.6;
+}
+
+main {
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+/* Sidenotes */
+.sidenote-ref {
+  color: #4a90e2;
+  font-size: 0.75em;
+  vertical-align: super;
+  line-height: 0;
+  cursor: default;
+}
+
+.sidenote {
+  float: right;
+  clear: right;
+  margin-right: -270px;
+  width: 250px;
+  font-size: 0.82em;
+  line-height: 1.4;
+  color: #555;
+  vertical-align: baseline;
+  position: relative;
+}
+
+.sidenote p {
+  margin: 0;
+}
+
+.sidenote sup {
+  color: #4a90e2;
+  font-size: 0.75em;
+}
+
+@media (max-width: 1150px) {
+  .sidenote {
+    float: none;
+    display: block;
+    margin-right: 0;
+    width: auto;
+    border-left: 2px solid #ccc;
+    padding-left: 0.6em;
+    margin-top: 0.4em;
+    margin-bottom: 0.4em;
+  }
 }
 
 h1, h2, h3 {
